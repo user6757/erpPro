@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnABoardDAOImpl">
+
+<select id="qnalist" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
+  	select
+  	 * from qnaboard
+  </select>
+  <insert id="qnainsert">
+  	 insert
+  	  into qnaboard(qnano, title, writer, content, qnaregdate, qnacnt)
+  	  values(freeboard_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{qnacnt})
+  </insert>
+  
+  <update id="qnaedit">
+  		update qnaboard set title = #{title}, content = #{content}
+  		 where qnano = #{qnano}
+  </update>
+  
+  <select id="qnaone" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
+  	select
+  	 * from qnaboard
+  	 where qnano = #{qnano}
+  </select>
+  
+  <delete id="qnadelete">
+  	delete from qnaboard
+  	  where qnano = #{qnano}
+  	
+  </delete>
+
+</mapper>
