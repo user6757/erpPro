@@ -1,4 +1,4 @@
-<%-- <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -99,22 +99,22 @@
     <div class="wrap">
 
         <%@ include file="../../include/header.jsp" %>
-
+		<h2>Q&A 게시판</h2>
         <div class="board-list">
 
             <div class="top-section">
                 <!-- 검색창 영역 -->
                 <div class="search">
-                    <form action="/board/list" method="get">
+                    <form action="/free/list" method="get">
                         
                         <select class="form-select" name="type" id="search-type">
                             <option value="title">제목</option>
                             <option value="content">내용</option>
                             <option value="writer">작성자</option>
-                            <option value="tc">제목+내용</option>
+                            <!-- <option value="tc">제목+내용</option> -->
                         </select>
 
-                        <input type="text" class="form-control" name="keyword" value="${s.keyword}">
+                        <input type="text" class="form-control" name="keyword" value="${search.keyword}">
 
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
@@ -142,12 +142,14 @@
 
                 <c:forEach var="free" items="${free}">
                     <tr>
-                        <td>${free.seq}</td>
+                        <td><a href="/free/detail?seq=${free.seq }">${free.seq}</a></td>
                         <td>${free.writer}</td>
-                        <td title="${free.title}">
-                            
+                        <td>
+                        ${free.title}
+                            <%-- ${b.shortTitle} [${b.replyCount}]
+                            <c:if test="${b.newArticle}">
                                 <span class="badge rounded-pill bg-danger">new</span>
-                            
+                            </c:if> --%>
                         </td>
                         <td>${free.cnt}</td>
                         <td>${free.regdate}</td>
@@ -162,20 +164,20 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-lg pagination-custom">
 
-                        <c:if test="${pm.prev}">
+                       <c:if test="${pm.page > 1}">
                             <li class="page-item"><a class="page-link"
-                                    href="/board/list?pageNum=${pm.beginPage - 1}&amount=${pm.page.amount}&type=${s.type}&keyword=${s.keyword}">prev</a></li>
+                                    href="/free/list?pageNum=${pm.page - 1}">prev</a></li>
                         </c:if>
 
-                        <c:forEach var="n" begin="${pm.beginPage}" end="${pm.endPage}" step="1">
-                            <li data-page-num="${n}" class="page-item">
-                                <a class="page-link" href="/board/list?pageNum=${n}&amount=${pm.page.amount}&type=${s.type}&keyword=${s.keyword}">${n}</a>
+                        <c:forEach var="p" begin="${pm.startpage}" end="${pm.endpage}" step="1">
+                            <li data-page-num="${p}" class="page-item">
+                                <a class="page-link" href="/free/list?page=${p}">${p}</a>
                             </li>
                         </c:forEach>
 
-                        <c:if test="${pm.next}">
+                        <c:if test="${pm.page < pm.maxpage}">
                             <li class="page-item"><a class="page-link"
-                                    href="/board/list?pageNum=${pm.endPage + 1}&amount=${pm.page.amount}&type=${s.type}&keyword=${s.keyword}">next</a></li>
+                                    href="/free/list?page=${pm.endpage + 1}">next</a></li>
                         </c:if>
 
                     </ul>
@@ -183,7 +185,7 @@
 
                 <!-- 글쓰기 버튼 영역 -->
                 <div class="btn-write">
-                    <a class="btn btn-outline-danger btn-lg" href="/board/write">글쓰기</a>
+                    <a class="btn btn-outline-danger btn-lg" href="/free/write">글쓰기</a>
                 </div>
             </div>
         </div>
@@ -207,20 +209,14 @@
         function detailEvent() {
             //상세보기 요청 이벤트
             const $table = document.querySelector(".articles");
-
+			console.log('ss');
             $table.addEventListener('click', e => {
-
-
                 if (!e.target.matches('.articles td')) return;
 
-                console.log('tr 클릭됨! - ', e.target);
-
                 let bn = e.target.parentElement.firstElementChild.textContent;
-                console.log('글번호: ' + bn);
 
-                location.href = '/free/editpage/' + bn 
-                                + "?seq=${}"
-                                + "&amount=${pm.page.amount}";
+                location.href = '/free/detail'
+                                + "?seq="+bn;
             });
         }
 
@@ -228,7 +224,7 @@
         function appendPageActive() {
 
             // 현재 내가 보고 있는 페이지 넘버
-            const curPageNum = '${pm.page.pageNum}';
+            const curPageNum = '${pm.page}';
             // console.log("현재페이지: ", curPageNum);
 
             // 페이지 li태그들을 전부 확인해서 
@@ -250,7 +246,7 @@
             const $select = document.getElementById('search-type');
 
             for (let $opt of [...$select.children]) {
-                if ($opt.value === '${s.type}') {
+                if ($opt.value === '${search.type}') {
                     $opt.setAttribute('selected', 'selected');
                     break;
                 }
@@ -271,4 +267,4 @@
 
 </body>
 
-</html> --%>
+</html>
