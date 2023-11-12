@@ -25,8 +25,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	@RequestMapping("/qna/list")
 	public String qnalist(Model model, QnABoardVO qnavo) {
 		List<QnABoardVO> list = qnaBoardService.listBoard();
-		System.out.println("확인");
-		System.out.println("리스트확인");
 		model.addAttribute("qna", list);
 		return "community/qna/qnaBoardlist";
 	}
@@ -62,11 +60,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	
 	@RequestMapping("/qna/delete")
 	public String qnadelete(int seq) {
-//		if(result > 0) {
-//			return "redirect:/free/list";
-//		}else {
-//			return "community/freeBoard/freeBoardedit";
-//		}
 		return "";
 	}
 }
