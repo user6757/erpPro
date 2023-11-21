@@ -152,7 +152,7 @@
                             </c:if> --%>
                         </td>
                         <td>${free.cnt}</td>
-                        <td>${free.regdate}</td>
+                        <td>${free.strRegdate}</td>
                     </tr>
                 </c:forEach>
             </table>

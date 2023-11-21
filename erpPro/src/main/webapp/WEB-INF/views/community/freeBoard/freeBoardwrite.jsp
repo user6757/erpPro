@@ -41,7 +41,7 @@
 
         <div class="write-container">
 
-            <form id="write-form" action="/free/save" method="post" autocomplete="off">
+            <form id="write-form" action="/free/save" method="post" autocomplete="off" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="writer-input" class="form-label">작성자</label>
@@ -56,6 +56,7 @@
                     <label for="exampleFormControlTextarea1" class="form-label">내용</label>
                     <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
                 </div>
+                <input type="text" name="filename" id="filename" value="${filename }">
 
                 <!-- 첨부파일 드래그 앤 드롭 영역 -->
                 <div class="form-group">
@@ -67,10 +68,8 @@
                     </div>
                     <!-- 업로드된 파일의 썸네일을 보여줄 영역 -->
                     <div class="uploaded-list">
-
                     </div>
                 </div>
-
                 <div class="d-grid gap-2">
                     <button id="reg-btn" class="btn btn-dark" type="button">글 작성하기</button>
                     <button id="to-list" class="btn btn-warning" type="button">목록으로</button>
@@ -93,15 +92,14 @@
             console.log('w: ', $writerInput.value);
             console.log('t: ', $titleInput.value);
 
-            if ($writerInput.value.trim() === '' || $writerInput.value.trim() === null) {
+            if ($writerInput.value.trim() === '') {
                 alert('작성자는 필수값입니다~');
-            } else if ($titleInput.value.trim() === '' || $writerInput.value.trim() === null) {
+            } else if ($titleInput.value.trim() === '') {
                 alert('제목은 필수값입니다~');
             } else {
                 flag = true;
             }
 
-            console.log('title:', $titleInput);
             console.log('flag:', flag);
 
             return flag;
@@ -115,13 +113,7 @@
             if (!validateFormValue()) {
                 return;
             }
-            
-            const $writer = document.getElementById('writer-input');
-            const $title = document.getElementById('title-input');
-			
-            console.log('writers:', $writer);
-            console.log('title:', $title);
-            
+
             // 필수 입력값을 잘 채웠으면 폼을 서브밋한다.
             const $form = document.getElementById('write-form');
             $form.submit();
@@ -136,8 +128,11 @@
     </script>
 
     <script>
+    	
         // start JQuery 
         $(document).ready(function () {
+        	
+        	var $filename = document.getElementById('filename');
 
             function isImageFile(originFileName) {
                 //정규표현식
@@ -150,7 +145,6 @@
 
                 //원본 파일 명 추출
                 let originFileName = fileName.substring(fileName.indexOf("_") + 1);
-
 
                 // hidden input을 만들어서 변환파일명을 서버로 넘김
                 const $hiddenInput = document.createElement('input');
@@ -191,7 +185,6 @@
 
             }
 
-
             // 드롭한 파일을 화면에 보여주는 함수
             function showFileData(fileNames) {
 
@@ -201,8 +194,6 @@
                     checkExtType(fileName);
                 }
             }
-
-
 
             // drag & drop 이벤트
             const $dropBox = $('.fileDrop');
@@ -231,7 +222,7 @@
                 // 드롭된 파일 정보를 서버로 전송
 
                 // 1. 드롭된 파일 데이터 읽기
-                // console.log(e);
+                console.log('확인', e);
                 const files = e.originalEvent.dataTransfer.files;
                 // console.log('drop file data: ', files);
 
@@ -256,11 +247,11 @@
                 };
                 fetch('/ajax-upload', reqInfo)
                     .then(res => {
-                        //console.log(res.status);
+                    	$filename.value = ${filename};
                         return res.json();
                     })
                     .then(fileNames => {
-                        console.log(fileNames);
+                        console.log('실패', fileNames);
 
                         showFileData(fileNames);
                     });

@@ -1,5 +1,7 @@
 package com.jin.erp.community.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,16 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		freevo.setLimit(freevo.getStart()+freevo.getLimit()-1);
 		if(freevo.getType() != null && freevo.getKeyword() != null) {
 			return freeDAO.search(freevo);
+		}else {
+			List<FreeBoardVO> list= freeDAO.listBoard(freevo);
+			for(FreeBoardVO freeBoardVO : list) {
+				SimpleDateFormat setregdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = freeBoardVO.getRegdate();
+				freeBoardVO.setStrRegdate(setregdate.format(date));
+			}
+			return list;
 		}
-		return freeDAO.listBoard(freevo);
+		
 	}
 	
 	public int insertBoard(FreeBoardVO freeVO) {

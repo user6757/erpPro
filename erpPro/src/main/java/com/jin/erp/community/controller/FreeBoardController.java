@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jin.erp.HomeController;
 import com.jin.erp.community.service.FreeBoardServiceImpl;
@@ -58,17 +59,28 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		return "community/freeBoard/freeBoardwrite";
 	}
 	
-	@RequestMapping("/free/save")
-	public String freesave(FreeBoardVO freevo) {
-		freeBoardService.insertBoard(freevo);
-		return "redirect:/free/list";
+	@RequestMapping(value="/free/save", method=RequestMethod.POST)
+	public String freesave(FreeBoardVO freeBoardVO, HttpServletRequest request) {
+		System.out.println("ÆÄÀÏ:"+ freeBoardVO.getFilename());
+		freeBoardService.insertBoard(freeBoardVO);
+		Page paging = new Page();
+
+		if(request.getParameter("page") != null) {
+			paging.setPage(Integer.parseInt(request.getParameter("page")));
+		}
+
+		List<FreeBoardVO> list = freeBoardService.listBoard(freeBoardVO, paging);
+		for(FreeBoardVO freevo : list) {
+			return "redirect:/free/detail?seq="+freevo.getSeq();
+		}
+		return "community/freeBoard/freeBoardwrite";
 	}
 	
 	@RequestMapping("/free/update")
 	public String freeupdate(FreeBoardVO freevo) {
 		int result = freeBoardService.editBoard(freevo);
 		if(result > 0) {
-			return "redirect:/free/list";
+			return "redirect:/free/detail?seq="+freevo.getSeq();
 		}else {
 			return "community/freeBoard/freeBoardedit";
 		}
