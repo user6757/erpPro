@@ -96,7 +96,8 @@
 
             <!-- 파일 첨부 영역 -->
             <div class="form-group">
-                <ul class="uploaded-list"></ul>
+                <ul class="uploaded-list">
+                </ul>
             </div>
 
             <div class="btn-group btn-group-lg custom-btn-group" role="group">

@@ -64,10 +64,11 @@
                     </div>
                     <div class="uploadDiv">
                         <input type="file" name="files" id="ajax-file" style="display:none;">
+                       
                     </div>
                     <!-- 업로드된 파일의 썸네일을 보여줄 영역 -->
                     <div class="uploaded-list">
-
+						<input type="text" name="filename" id="filename" value="">
                     </div>
                 </div>
 
@@ -202,7 +203,7 @@
                 }
             }
 
-
+            let fileList = new Array();
 
             // drag & drop 이벤트
             const $dropBox = $('.fileDrop');
@@ -257,10 +258,11 @@
                 fetch('/ajax-upload', reqInfo)
                     .then(res => {
                         //console.log(res.status);
+                        console.log('성공:', res.data);
                         return res.json();
                     })
                     .then(fileNames => {
-                        console.log(fileNames);
+                        console.log('여기:', fileNames);
 
                         showFileData(fileNames);
                     });

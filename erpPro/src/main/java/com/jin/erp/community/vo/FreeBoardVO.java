@@ -9,7 +9,10 @@ public class FreeBoardVO {
 	private String writer;		//작성자
 	private String content;		//내용
 	private Date regdate;		//작성날짜
+	private String strRegdate;
 	private Integer cnt;		//조회수
+	private String filename;
+	private String filedate;
 	private String keyword;
 	private String type;
 	private int start;
@@ -79,6 +82,30 @@ public class FreeBoardVO {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getFiledate() {
+		return filedate;
+	}
+
+	public void setFiledate(String filedate) {
+		this.filedate = filedate;
+	}
+
+	public String getStrRegdate() {
+		return strRegdate;
+	}
+
+	public void setStrRegdate(String strRegdate) {
+		this.strRegdate = strRegdate;
 	}
 	
 }
