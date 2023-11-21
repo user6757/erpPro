@@ -21,18 +21,28 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		
 		freevo.setStart((page.getPage()-1)*freevo.getLimit()+1);
 		freevo.setLimit(freevo.getStart()+freevo.getLimit()-1);
+		
 		if(freevo.getType() != null && freevo.getKeyword() != null) {
-			return freeDAO.search(freevo);
+			List<FreeBoardVO> searchlist = freeDAO.search(freevo);
+			
+			for(FreeBoardVO freeBoardVO : searchlist) {
+				freeBoardVO.setStrRegdate(strdate(freeBoardVO));
+			}
+			return searchlist;
 		}else {
 			List<FreeBoardVO> list= freeDAO.listBoard(freevo);
 			for(FreeBoardVO freeBoardVO : list) {
-				SimpleDateFormat setregdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date date = freeBoardVO.getRegdate();
-				freeBoardVO.setStrRegdate(setregdate.format(date));
+				freeBoardVO.setStrRegdate(strdate(freeBoardVO));
 			}
 			return list;
 		}
 		
+	}
+	
+	private String strdate(FreeBoardVO freeBoardVO) {
+		SimpleDateFormat setregdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = freeBoardVO.getRegdate();
+		return setregdate.format(date);
 	}
 	
 	public int insertBoard(FreeBoardVO freeVO) {
