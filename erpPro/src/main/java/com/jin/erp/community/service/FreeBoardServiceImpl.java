@@ -55,7 +55,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	
 	public FreeBoardVO detailboard(FreeBoardVO freeVO) {
-		return freeDAO.detailboard(freeVO);
+		FreeBoardVO freeBoardVO = freeDAO.detailboard(freeVO);
+		freeBoardVO.setStrRegdate(strdate(freeBoardVO));
+		return freeBoardVO;
 	}
 	
 	public int deleteBoard(int seq) {

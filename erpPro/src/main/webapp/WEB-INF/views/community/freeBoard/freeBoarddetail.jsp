@@ -73,7 +73,12 @@
         <div class="content-container">
 
             <h1 class="main-title">${free.seq}번 게시물</h1>
-
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">작성(수정)날짜</label>
+				<p>
+					${free.strRegdate }
+				</p>
+			</div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">작성자</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름" name="writer"
@@ -89,7 +94,6 @@
 
                 <p class="main-content">
                     ${free.content}
-
                 </p>
 
             </div>

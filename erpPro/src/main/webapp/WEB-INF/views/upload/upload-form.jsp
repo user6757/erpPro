@@ -176,7 +176,7 @@
                 };
                 fetch('/ajax-upload', reqInfo)
                     .then(res => {
-                        //console.log(res.status);
+                        console.log('실행', res.status);
                         return res.json();
                     })
                     .then(fileNames => {
