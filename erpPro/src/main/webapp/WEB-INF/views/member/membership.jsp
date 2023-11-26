@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ include file="../include/static-head.jsp" %>
 
@@ -21,25 +19,20 @@
         }
     </style>
 </head>
-
 <body>
-
     <%@ include file="../include/header.jsp" %>
-
-
     <div class="container wrap">
         <div class="row">
             <div class="offset-md-2 col-md-4">
                 <div class="card" style="width:200%;">
                     <div class="card-header text-white" style="background: #343A40;">
-                        <h2><span style="color: gray;">MVC</span> 회원 가입</h2>
+                        <h2>회원가입</h2>
                     </div>
                     <div class="card-body">
 
 
-                        <form action="/member/sign-up" name="signup" id="signUpForm" method="post"
+                        <form action="/member/signup" name="signup" id="signUpForm" method="post"
                             style="margin-bottom: 0;">
-
 
                             <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                                 <tr>
@@ -96,7 +89,6 @@
                                             placeholder="한글로 최대 6자"></td>
                                 </tr>
 
-
                                 <tr>
                                     <td style="text-align: left">
                                         <p><strong>이메일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span>
@@ -110,7 +102,6 @@
                                             placeholder="ex) abc@mvc.com"></td>
                                 </tr>
 
-
                                 <tr>
                                     <td style="padding-top: 10px; text-align: center">
                                         <p><strong>회원가입하셔서 더 많은 서비스를 사용하세요~~!</strong></p>
@@ -118,8 +109,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 100%; text-align: center; colspan: 2;">
-                                        <input type="button" value="회원가입" class="btn form-control tooltipstered"
-                                            id="signup-btn"
+                                        <input type="button" value="회원가입" class="btn form-control tooltipstered" id="signup-btn"
                                             style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
                                     </td>
                                 </tr>
@@ -131,9 +121,8 @@
             </div>
         </div>
     </div>
-
-
     <script>
+    
         // 회원가입 폼 검증
         $(document).ready(function () {
             //입력값 검증 정규표현식
@@ -170,12 +159,16 @@
 
                 // 아이디 중복 확인 검증
                 else {
-
-                    fetch('/member/check?type=account&value=' + $idInput.val())
-                        .then(res => res.text())
-                        .then(flag => {
-                            console.log('flag:', flag);
-                            if (flag === 'true') {
+                    console.log('확');
+                    $.ajax({
+                        type : 'post',
+			            url : '/member/idcheck',
+			            data : {
+                            account: $idInput.val(),
+			            },
+                        success:function(result) {
+                            console.log('flag:', result);
+                            if (result === true) {
                                 $idInput.css('border-color', 'red');
                                 $('#idChk').html('<b class="c-red">[중복된 아이디입니다.]</b>');
                                 checkArr[0] = false;
@@ -185,7 +178,11 @@
                                 $('#idChk').html('<b class="c-blue">[사용가능한 아이디입니다.]</b>');
                                 checkArr[0] = true;
                             }
-                        });
+                        },
+                        error:function(xhres){
+							console.log(xhres);
+						},
+                    });
 
                 }
 
@@ -292,7 +289,6 @@
 
             });
 
-
             // 회원가입 양식 서버로 전송하는 클릭 이벤트
             const $regForm = $('#signUpForm');
 
@@ -304,8 +300,6 @@
                     alert('입력란을 다시 확인하세요!');
                 }
             });
-
-
 
         }); // end jQuery
     </script>

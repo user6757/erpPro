@@ -21,28 +21,28 @@ import java.util.List;
 @Controller
 public class UploadController {
 
-    // ì—…ë¡œë“œ íŒŒì¼ ì €ì¥ ê²½ë¡œ
+    // ¾÷·Îµå ÆÄÀÏ ÀúÀå °æ·Î
     private static final String UPLOAD_PATH = "C:\\allProject\\ERPwork\\erpPro\\src\\main\\webapp\\resources\\upload";
 
-    // upload-form.jspë¡œ í¬ì›Œë”©í•˜ëŠ” ìš”ì²­
+    // upload-form.jsp·Î Æ÷¿öµùÇÏ´Â ¿äÃ»
     @GetMapping("/upload-form")
     public String uploadForm() {
         return "upload/upload-form";
     }
 
-    // íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬ë¥¼ ìœ„í•œ ìš”ì²­
-    // MultipartFile: í´ë¼ì´ì–¸íŠ¸ê°€ ì „ì†¡í•œ íŒŒì¼ ì •ë³´ë“¤ì„ ë‹´ì€ ê°ì²´
-    // ex) ì›ë³¸ íŒŒì¼ëª…, íŒŒì¼ ìš©ëŸ‰, íŒŒì¼ ì»¨í…ì¸ íƒ€ì…...
+    // ÆÄÀÏ ¾÷·Îµå Ã³¸®¸¦ À§ÇÑ ¿äÃ»
+    // MultipartFile: Å¬¶óÀÌ¾ğÆ®°¡ Àü¼ÛÇÑ ÆÄÀÏ Á¤º¸µéÀ» ´ãÀº °´Ã¼
+    // ex) ¿øº» ÆÄÀÏ¸í, ÆÄÀÏ ¿ë·®, ÆÄÀÏ ÄÁÅÙÃ÷Å¸ÀÔ...
     @PostMapping("/upload")
     public String upload(@RequestParam("file") List<MultipartFile> fileList) {
     	System.out.println("upload");
         for (MultipartFile file: fileList) {
             System.out.println("==================================================================");
 
-            // ì„œë²„ì— ì—…ë¡œë“œíŒŒì¼ ì €ì¥
+            // ¼­¹ö¿¡ ¾÷·ÎµåÆÄÀÏ ÀúÀå
 
-            // 1. ì„¸ì´ë¸ŒíŒŒì¼ ê°ì²´ ìƒì„±
-            //  - ì²«ë²ˆì§¸ íŒŒë¼ë¯¸í„°ëŠ” íŒŒì¼ ì €ì¥ê²½ë¡œ ì§€ì •, ë‘ë²ˆì§¸ íŒŒì¼ëª…ì§€ì •
+            // 1. ¼¼ÀÌºêÆÄÀÏ °´Ã¼ »ı¼º
+            //  - Ã¹¹øÂ° ÆÄ¶ó¹ÌÅÍ´Â ÆÄÀÏ ÀúÀå°æ·Î ÁöÁ¤, µÎ¹øÂ° ÆÄÀÏ¸íÁöÁ¤
         /*File f = new File(uploadPath, file.getOriginalFilename());
 
         try {
@@ -57,73 +57,73 @@ public class UploadController {
         return "redirect:/upload-form";
     }
 
-    // ë¹„ë™ê¸° ìš”ì²­ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
+    // ºñµ¿±â ¿äÃ» ÆÄÀÏ ¾÷·Îµå Ã³¸®
     @PostMapping("/ajax-upload")
     @ResponseBody
     public String ajaxUpload(MultipartFile files, Model model) {
-        // í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ì†¡í•  íŒŒì¼ê²½ë¡œ ë¦¬ìŠ¤íŠ¸
-        // í´ë¼ì´ì–¸íŠ¸ê°€ ì „ì†¡í•œ íŒŒì¼ ì—…ë¡œë“œí•˜ê¸°
+        // Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü¼ÛÇÒ ÆÄÀÏ°æ·Î ¸®½ºÆ®
+        // Å¬¶óÀÌ¾ğÆ®°¡ Àü¼ÛÇÑ ÆÄÀÏ ¾÷·ÎµåÇÏ±â
         String fullPath = FileUtils.uploadFile(files, UPLOAD_PATH);
-            System.out.println("íŒŒì¼ ì´ë¦„:"+fullPath);
+        System.out.println("ÆÄÀÏ ÀÌ¸§:"+fullPath);
         model.addAttribute("filename", fullPath);    
         return fullPath;
     }
 
-    // íŒŒì¼ ë°ì´í„° ë¡œë“œ ìš”ì²­ ì²˜ë¦¬
+    // ÆÄÀÏ µ¥ÀÌÅÍ ·Îµå ¿äÃ» Ã³¸®
     /*
-        ë¹„ë™ê¸° í†µì‹  ì‘ë‹µì‹œ ResponseEntityë¥¼ ì“°ëŠ” ì´ìœ ëŠ”
-        ì´ ê°ì²´ëŠ” ì‘ë‹µ bodyì •ë³´ ì´ì™¸ì—ë„ headerì •ë³´ë¥¼ í¬í•¨í•  ìˆ˜ ìˆê³ 
-        ì¶”ê°€ë¡œ ì‘ë‹µ ìƒíƒœì½”ë“œë„ ì œì–´í•  ìˆ˜ ìˆë‹¤.
+        ºñµ¿±â Åë½Å ÀÀ´ä½Ã ResponseEntity¸¦ ¾²´Â ÀÌÀ¯´Â
+        ÀÌ °´Ã¼´Â ÀÀ´ä bodyÁ¤º¸ ÀÌ¿Ü¿¡µµ headerÁ¤º¸¸¦ Æ÷ÇÔÇÒ ¼ö ÀÖ°í
+        Ãß°¡·Î ÀÀ´ä »óÅÂÄÚµåµµ Á¦¾îÇÒ ¼ö ÀÖ´Ù.
      */
     @GetMapping("/loadFile")
     @ResponseBody
-    // fileName = /2022/08/01/ë³€í™˜ëœ íŒŒì¼ëª…
+    // fileName = /2022/08/01/º¯È¯µÈ ÆÄÀÏ¸í
     public ResponseEntity<byte[]> loadFile(String fileName) {
     	System.out.println("loadFile");
-        // í´ë¼ì´ì–¸íŠ¸ê°€ ìš”ì²­í•˜ëŠ” íŒŒì¼ì˜ ì§„ì§œ ë°”ì´íŠ¸ ë°ì´í„°ë¥¼ ê°–ë‹¤ì¤˜ì•¼ í•¨.
+        // Å¬¶óÀÌ¾ğÆ®°¡ ¿äÃ»ÇÏ´Â ÆÄÀÏÀÇ ÁøÂ¥ ¹ÙÀÌÆ® µ¥ÀÌÅÍ¸¦ °®´ÙÁà¾ß ÇÔ.
 
-        // 1. ìš”ì²­ íŒŒì¼ ì°¾ì•„ì„œ fileê°ì²´ë¡œ í¬ì¥
+        // 1. ¿äÃ» ÆÄÀÏ Ã£¾Æ¼­ file°´Ã¼·Î Æ÷Àå
         File f = new File(UPLOAD_PATH + fileName);
 
         if (!f.exists()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        // 2. í•´ë‹¹ íŒŒì¼ì„ InputStreamì„ í†µí•´ ë¶ˆëŸ¬ì˜¨ë‹¤.
+        // 2. ÇØ´ç ÆÄÀÏÀ» InputStreamÀ» ÅëÇØ ºÒ·¯¿Â´Ù.
         try (FileInputStream fis = new FileInputStream(f)) {
 
-            // 3. í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ìˆœìˆ˜ ì´ë¯¸ì§€ë¥¼ ì‘ë‹µí•´ì•¼ í•˜ë¯€ë¡œ MIME TYPEì„ ì‘ë‹µí—¤ë”ì— ì„¤ì •
+            // 3. Å¬¶óÀÌ¾ğÆ®¿¡°Ô ¼ø¼ö ÀÌ¹ÌÁö¸¦ ÀÀ´äÇØ¾ß ÇÏ¹Ç·Î MIME TYPEÀ» ÀÀ´äÇì´õ¿¡ ¼³Á¤
             // ex) image/jpeg, image/png, image/gif
-            // í™•ì¥ìë¥¼ ì¶”ì¶œí•´ì•¼ í•¨.
+            // È®ÀåÀÚ¸¦ ÃßÃâÇØ¾ß ÇÔ.
             String ext = FileUtils.getFileExtension(fileName);
             MediaType mediaType = FileUtils.getMediaType(ext);
 
-            // ì‘ë‹µí—¤ë”ì— ë¯¸ë””ì–´ íƒ€ì… ì„¤ì •
+            // ÀÀ´äÇì´õ¿¡ ¹Ìµğ¾î Å¸ÀÔ ¼³Á¤
             HttpHeaders headers = new HttpHeaders();
 
-            if (mediaType != null) { // ì´ë¯¸ì§€ë¼ë©´
+            if (mediaType != null) { // ÀÌ¹ÌÁö¶ó¸é
                 headers.setContentType(mediaType);
-            } else { // ì´ë¯¸ì§€ê°€ ì•„ë‹ˆë©´ ë‹¤ìš´ë¡œë“œ ê°€ëŠ¥í•˜ê²Œ ì„¤ì •
+            } else { // ÀÌ¹ÌÁö°¡ ¾Æ´Ï¸é ´Ù¿î·Îµå °¡´ÉÇÏ°Ô ¼³Á¤
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
-                // íŒŒì¼ëª…ì„ ì›ë˜ëŒ€ë¡œ ë³µêµ¬
+                // ÆÄÀÏ¸íÀ» ¿ø·¡´ë·Î º¹±¸
                 fileName = fileName.substring(fileName.lastIndexOf("_") + 1);
 
-                // íŒŒì¼ëª…ì´ í•œê¸€ì¸ ê²½ìš° ì¸ì½”ë”© ì¬ì„¤ì •
+                // ÆÄÀÏ¸íÀÌ ÇÑ±ÛÀÎ °æ¿ì ÀÎÄÚµù Àç¼³Á¤
                 String encoding = new String(
                         fileName.getBytes("UTF-8"), "ISO-8859-1");
 
-                // í—¤ë”ì— ìœ„ ë‚´ìš©ë“¤ ì¶”ê°€
+                // Çì´õ¿¡ À§ ³»¿ëµé Ãß°¡
                 headers.add("Content-Disposition"
                         , "attachment; fileName=\"" + encoding + "\"");
 
             }
 
-            // 4. íŒŒì¼ ìˆœìˆ˜ë°ì´í„° ë°”ì´íŠ¸ë°°ì—´ì— ì €ì¥.
+            // 4. ÆÄÀÏ ¼ø¼öµ¥ÀÌÅÍ ¹ÙÀÌÆ®¹è¿­¿¡ ÀúÀå.
             byte[] rawData = IOUtils.toByteArray(fis);
 
-            // 5. ë¹„ë™ê¸°í†µì‹ ì—ì„œ ë°ì´í„° ì‘ë‹µí•  ë•Œ ResponseEntityê°ì²´ë¥¼ ì‚¬ìš©
-            return new ResponseEntity<>(rawData, headers, HttpStatus.OK); // í´ë¼ì´ì–¸íŠ¸ì— íŒŒì¼ ë°ì´í„° ì‘ë‹µ
+            // 5. ºñµ¿±âÅë½Å¿¡¼­ µ¥ÀÌÅÍ ÀÀ´äÇÒ ¶§ ResponseEntity°´Ã¼¸¦ »ç¿ë
+            return new ResponseEntity<>(rawData, headers, HttpStatus.OK); // Å¬¶óÀÌ¾ğÆ®¿¡ ÆÄÀÏ µ¥ÀÌÅÍ ÀÀ´ä
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,13 +131,13 @@ public class UploadController {
         }
     }
 
-    //ì„œë²„ì— ìˆëŠ” íŒŒì¼ ì‚­ì œ ìš”ì²­ì²˜ë¦¬
+    //¼­¹ö¿¡ ÀÖ´Â ÆÄÀÏ »èÁ¦ ¿äÃ»Ã³¸®
     //URI: /deleteFile?fileName=/2019/09/22/s_djfksldfjs_abc.jpg
     @DeleteMapping("/deleteFile")
     public ResponseEntity<String> deleteFile(String fileName) throws Exception {
 
         try {
-            //íŒŒì¼ ì‚­ì œ
+            //ÆÄÀÏ »èÁ¦
             File delFile = new File(UPLOAD_PATH + fileName);
             if (!delFile.exists()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 

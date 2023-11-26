@@ -10,6 +10,7 @@ public class QnABoardVO {
 	private String content;		//내용
 	private Date qnaregdate;		//작성날짜
 	private Integer qnacnt;		//조회수
+	
 	public Integer getQnano() {
 		return qnano;
 	}
