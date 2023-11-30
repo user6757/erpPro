@@ -8,4 +8,15 @@
 		where account = #{account}
 	</select>
 	
+	<insert id="singup">
+		insert
+		 into erpmember(
+		 account,
+		  password,
+		   name,
+		    email,
+		     reg_date)
+		values(#{account}, #{password}, #{name}, #{email}, sysdate)
+	</insert>
+	
 </mapper>

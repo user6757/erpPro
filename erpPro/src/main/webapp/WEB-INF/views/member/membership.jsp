@@ -140,14 +140,12 @@
             const $idInput = $('#user_id');
 
             $idInput.on('keyup', e => {
-
                 // 아이디를 입력하지 않은 경우
                 if ($idInput.val().trim() === '') {
                     $idInput.css('border-color', 'red');
                     $('#idChk').html('<b class="c-red">[아이디는 필수 정보입니다.]</b>');
                     checkArr[0] = false;
                 }
-
                 // 아이디를 패턴에 맞지 않게 입력하였을 경우
                 // test() 메서드는 정규표현식을 검증하여 입력값이 표현식과
                 // 일치하면 true, 일치하지 않으면 false를 리턴
@@ -156,7 +154,6 @@
                     $('#idChk').html('<b class="c-red">[영문, 숫자로 4~14자 사이로 작성하세요!]</b>');
                     checkArr[0] = false;
                 }
-
                 // 아이디 중복 확인 검증
                 else {
                     console.log('확');
@@ -183,9 +180,7 @@
 							console.log(xhres);
 						},
                     });
-
                 }
-
             }); //end id check event
 
             //2. 패스워드 입력값 검증.
@@ -193,7 +188,7 @@
                 //비밀번호 공백 확인
                 if ($("#password").val() === "") {
                     $('#password').css('border-color', 'red');
-                    $('#pwChk').html('<b class="c-red">[패스워드는 필수정보!]</b>');
+                    $('#pwChk').html('<b class="c-red">[패스워드는 필수정보 입니다.]</b>');
                     checkArr[1] = false;
                 }
                 //비밀번호 유효성검사
@@ -203,7 +198,7 @@
                     checkArr[1] = false;
                 } else {
                     $('#password').css('border-color', 'skyblue');
-                    $('#pwChk').html('<b class="c-blue">[참 잘했어요]</b>');
+                    $('#pwChk').html('<b class="c-blue">[사용가능한 패스워드 입니다.]</b>');
                     checkArr[1] = true;
                 }
 
@@ -214,13 +209,13 @@
                 //비밀번호 확인란 공백 확인
                 if ($("#password_check").val() === "") {
                     $('#password_check').css('border-color', 'red');
-                    $('#pwChk2').html('<b class="c-red">[패스워드확인은 필수정보!]</b>');
+                    $('#pwChk2').html('<b class="c-red">[패스워드확인은 필수정보 입니다.]</b>');
                     checkArr[2] = false;
                 }
                 //비밀번호 확인란 유효성검사
                 else if ($("#password").val() !== $("#password_check").val()) {
                     $('#password_check').css('border-color', 'red');
-                    $('#pwChk2').html('<b class="c-red">[위에랑 똑같이!!]</b>');
+                    $('#pwChk2').html('<b class="c-red">[위 항목이랑 똑같이 작성해주세요.]</b>');
                     checkArr[2] = false;
                 } else {
                     $('#password_check').css('border-color', 'skyblue');
@@ -235,17 +230,17 @@
                 //이름값 공백 확인
                 if ($("#user_name").val() === "") {
                     $('#user_name').css('border-color', 'red');
-                    $('#nameChk').html('<b class="c-red">[이름은 필수정보!]</b>');
+                    $('#nameChk').html('<b class="c-red">[이름은 필수정보 입니다.]</b>');
                     checkArr[3] = false;
                 }
                 //이름값 유효성검사
                 else if (!getName.test($("#user_name").val())) {
                     $('#user_name').css('border-color', 'red');
-                    $('#nameChk').html('<b class="c-red">[이름은 한글로 ~]</b>');
+                    $('#nameChk').html('<b class="c-red">[이름은 한글로 작성해주세요!]</b>');
                     checkArr[3] = false;
                 } else {
                     $('#user_name').css('border-color', 'skyblue');
-                    $('#nameChk').html('<b class="c-blue">[참 잘했어요]</b>');
+                    $('#nameChk').html('<b class="c-blue">[성공!]</b>');
                     checkArr[3] = true;
                 }
 
@@ -257,13 +252,13 @@
                 //이메일값 공백 확인
                 if ($emailInput.val() == "") {
                     $emailInput.css('border-color', 'red');
-                    $('#emailChk').html('<b class="c-red">[이메일은 필수정보에요!]</b>');
+                    $('#emailChk').html('<b class="c-red">[이메일은 필수정보입니다.]</b>');
                     checkArr[4] = false;
                 }
                 //이메일값 유효성검사
                 else if (!getMail.test($emailInput.val())) {
                     $emailInput.css('border-color', 'red');
-                    $('#emailChk').html('<b class="c-red">[이메일 형식 몰라?]</b>');
+                    $('#emailChk').html('<b class="c-red">[이메일 형식으로 작성해주세요.]</b>');
                     checkArr[4] = false;
                 } else {
 

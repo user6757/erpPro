@@ -7,6 +7,13 @@ create table freeboard(
  cnt number(5) default 0
 );
 
+ALTER TABLE freeboard ADD filename VARCHAR(100);
+ALTER TABLE freeboard ADD filedate VARCHAR(300);
+
+ALTER TABLE freeboard DROP COLUMN filename;
+
+ALTER TABLE freeboard ADD files VARCHAR(300);
+
 CREATE TABLE erpmember (
     account VARCHAR(50),
     password VARCHAR(150) NOT NULL,
