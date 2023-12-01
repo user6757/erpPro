@@ -1,7 +1,6 @@
 package com.jin.erp.login.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +31,6 @@ public class LoginController {
  // 로그인 화면을 열어주는 요청처리
     @GetMapping("/member/singin")
     public String login(LoginDTO loginDTO, HttpServletRequest request, Model model) {
-    	System.out.println("sss"+ loginDTO.getAccount());
         return "member/login";
     }
 
