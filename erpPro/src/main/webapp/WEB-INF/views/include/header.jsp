@@ -10,8 +10,8 @@
             </a>
         </h1>
         <h2 class="intro-text">Welcome 
-            <c:if test="${loginUser != null}">
-                ${loginUser.name}님 Hello!!
+            <c:if test="${userid != null}">
+                ${userid}님 Hello!!
             </c:if>
         </h2>
         <a href="#" class="menu-open">
