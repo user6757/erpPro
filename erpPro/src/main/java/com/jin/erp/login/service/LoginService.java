@@ -1,5 +1,10 @@
 package com.jin.erp.login.service;
 
-public interface LoginService {
+import com.jin.erp.member.dto.LoginDTO;
 
+public interface LoginService {
+	
+	public boolean loginflag(LoginDTO loginDTO);
+	public String getname(String name);
+	
 }
