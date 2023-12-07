@@ -9,9 +9,9 @@
                 <img src="/resources/img/logo.png" alt="로고이미지">
             </a>
         </h1>
-        <h2 class="intro-text">Welcome 
+        <h2 class="intro-text">어서오세요.
             <c:if test="${userid != null}">
-                ${userid}님 Hello!!
+                ${userid}님
             </c:if>
         </h2>
         <a href="#" class="menu-open">
@@ -31,12 +31,12 @@
             <li><a href="/mroom/mrlist">Room</a></li>	<!-- 회의실 -->
             <li><a href="#">Contact</a></li>
 
-            <c:if test="${loginUser == null}">
+            <c:if test="${userid == null}">
                 <li><a href="/member/memberpage">Sign Up</a></li>
                 <li><a href="/member/login">Sign In</a></li>
             </c:if>
 
-            <c:if test="${loginUser != null}">
+            <c:if test="${userid != null}">
                 <li><a href="#">My Page</a></li>
                 <li><a href="/member/sign-out">Sign Out</a></li>
             </c:if>

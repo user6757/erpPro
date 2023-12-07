@@ -4,7 +4,7 @@ import com.jin.erp.member.dto.LoginDTO;
 
 public interface LoginService {
 	
-	public boolean loginflag(LoginDTO loginDTO);
+	public boolean loginflag(LoginDTO loginDTO)throws Exception;
 	public String getname(String name);
 	
 }

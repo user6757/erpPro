@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jin.erp.community.vo.FreeBoardVO;
 import com.jin.erp.login.service.LoginService;
 import com.jin.erp.member.dto.LoginDTO;
 
@@ -29,15 +30,28 @@ public class LoginController {
         request.getSession().setAttribute("redirectURI", referer);
     }
     
- // 로그인 화면을 열어주는 요청처리
+    // 로그인 화면을 열어주는 요청처리
     @PostMapping("/member/login")
-    public String login(LoginDTO loginDTO, HttpServletRequest request, Model model, HttpSession session) {
+    public String login(LoginDTO loginDTO,
+    		HttpServletRequest request,
+    		Model model,
+    		HttpSession session) throws Exception{
     	boolean loginflag = loginService.loginflag(loginDTO);
     	if(loginflag==true) {
+    		session.setMaxInactiveInterval(18000);
     		session.setAttribute("userid", loginService.getname(loginDTO.getAccount()));
     		return "index";
     	}
         return "member/login";
     }
+    
+    @RequestMapping(value="/member/sign-out")
+	public String logout(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	if(session != null) {
+    		session.invalidate();
+    	}
+		return "index";
+	}
 
 }

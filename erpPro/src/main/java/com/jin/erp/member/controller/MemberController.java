@@ -41,7 +41,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/signup")
-    public String signUp(Member member, RedirectAttributes ra) {
+    public String signUp(Member member, RedirectAttributes ra) throws Exception{
         boolean flag = memberService.singup(member);
         ra.addFlashAttribute("msg", "reg-success");
         return flag ? "redirect:/member/login" : "redirect:/member/membership";
