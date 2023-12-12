@@ -16,5 +16,10 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public String mroomlistpage() {
 		return "mroom/mrlist";
 	}
+	
+	@RequestMapping(value="/mroom/mrwrite")
+	public String mroomwrite() {
+		return "mroom/mrwrite";
+	}
 
 }
