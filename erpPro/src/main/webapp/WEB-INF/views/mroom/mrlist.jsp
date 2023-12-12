@@ -175,7 +175,7 @@
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example">
-                                <button type="button" class="btn btn-primary float-right clearfix" onclick="changeContentCus('mrmain', 'mrwrite')">예약</button>
+                                <button type="button" class="btn btn-primary float-right clearfix" onclick="mrwritepath()">예약</button>
                                 <ul class="pagination justify-content-center">
                                     <c:if test="${pm.prev}">
                                         <li class="page-item">
@@ -224,6 +224,11 @@
 
 <%@ include file="../include/footer.jsp" %>
 </body>
+<script type="text/javascript">
+	function mrwritepath(){
+		window.location.href='/mroom/mrwrite';
+	}
+</script>
 </html>
 <%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%--<!-- Begin Page Content 오른쪽 가운데 안에 들어가는 내용들의 전체 박스-->--%>
