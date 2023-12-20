@@ -24,6 +24,18 @@ CREATE TABLE erpmember (
     CONSTRAINT pk_member PRIMARY KEY (account)
 );
 
+CREATE TABLE meetingroom (
+    mrNo int,
+    mrUsers VARCHAR(60) NOT NULL,
+    mrTime DATE NOT NULL,
+    mrTitle VARCHAR(200) NOT NULL,
+    mrContent VARCHAR(1000)NOT NULL,
+    mrMax int,
+    mrRegDate DATE,
+    userId VARCHAR(100),
+    fileNo number(5)
+);
+
 
 create table qnaboard(
  qnano number(5) PRIMARY KEY,
@@ -38,6 +50,14 @@ commit;
 
 select * from freeboard;
 select * from qnaboard;
+
+CREATE SEQUENCE meetingroom_mrNo --시퀀스이름 WDRL_SEQ
+INCREMENT BY 1 --증감숫자 1
+START WITH 1 --시작숫자 1
+MINVALUE 1 --최소값 1
+MAXVALUE 9999999999 --최대값 
+NOCYCLE --순한하지않음
+NOCACHE; --메모리에 시퀀스값 미리할당
 
 CREATE SEQUENCE freeboard_seq --시퀀스이름 WDRL_SEQ
 INCREMENT BY 1 --증감숫자 1

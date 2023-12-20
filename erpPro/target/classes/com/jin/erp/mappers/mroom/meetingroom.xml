@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.erp.mroom.dao.MroomDAOImpl">
+	<insert id="mrsave">
+		insert
+  	      into meetingroom(
+  	        mrNo,
+  	 		mrUsers,
+  	 		mrTime,
+  	 		mrTitle,
+  	 		mrContent,
+  	 		mrMax,
+  	 		mrRegDate
+  	    )
+  	   values(
+  	 	meetingroom_mrNo.nextval,
+  	 	#{mrUsers},
+  	 	#{mrTime},
+  	    #{mrTitle},
+  	    #{mrContent},
+  	    #{mrMax},
+  	    sysdate
+  	  )
+	</insert>
+	
+	<select id="mrview" resultType="com.jin.erp.mroom.vo.MroomVO">
+		select
+		 * from meetingroom
+		order by mrNo desc 
+	</select>
+</mapper>
