@@ -28,4 +28,16 @@
 		 * from meetingroom
 		order by mrNo desc 
 	</select>
+	
+	<select id="mrdetail" resultType="com.jin.erp.mroom.vo.MroomVO">
+		select
+		 * from meetingroom
+		where mrNo = #{mrNo} 
+	</select>
+	
+	<update id="mrmodify">
+		update set mrContent=#{mrContent}
+		  from meetingroom
+		where mrNo = #{mrNo}	
+	</update>
 </mapper>

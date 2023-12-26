@@ -21,5 +21,13 @@ public class MroomDAOImpl implements MroomDAO{
 	public List<MroomVO> mrview(MroomVO mroomVO){
 		return sqlSession.selectList("mrview", mroomVO);
 	}
+	
+	public MroomVO mrdetail(int mrNo) {
+		return sqlSession.selectOne("mrdetail", mrNo);
+	}
+	
+	public int mrModify(MroomVO mroomVO) {
+		return sqlSession.update("mrmodify", mroomVO);
+	}
 
 }
