@@ -1,9 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ include file="../include/static-head.jsp" %>
 
@@ -95,6 +93,7 @@
 <body>
 	<%@ include file="../include/header.jsp" %>
 	
+	<br><br><br><br><br><br>
 	<!-- Begin Page Content 오른쪽 가운데 안에 들어가는 내용들의 전체 박스-->
 	<!-- Page Heading 회의실관리 목록 제목 설정-->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -110,10 +109,11 @@
 	
 	        <select class="form-select" name="type" id="search-type">
 	            <option value="title">제목</option>
-	            <%--            <option value="content">내용</option>--%>
-	            <%--            <option value="writer">작성자</option>--%>
-	            <%--            <option value="tc">제목+내용</option>--%>
+	              <option value="content">내용</option> 
+	               <option value="writer">작성자</option>
+	               <option value="tc">제목+내용</option> 
 	        </select>
+	        <br>
 	
 	        <input style="width: 100%; padding: 10px 20px; margin: 5px 0; box-sizing: border-box;" type="text" class="form-control" name="keyword" placeholder="입력해주세요!" value="${s.keyword}">
 	
@@ -149,7 +149,7 @@
 	                                <c:forEach var="m" items="${mlist}">
 	                                    <tr>
 	                                        <td>${m.mrNo}</td>
-	                                        <td><a href="/mrmain/mrdetail" onclick="changeContentCus('mrmain', 'mrdetail')">
+	                                        <td><a href="/mroom/mrdetail?mrNo=${m.mrNo }">
 	                                                ${m.mrTitle}
 	                                                <%--                                                ${m.shortTitle}--%>
 	                                            <%-- <c:if test="${m.mrNewArticle}">
@@ -166,7 +166,7 @@
 	                                <%--                                        <th scope="row">1</th> mrNo - 글 작성 번호--%>
 	                                <%--                                        <td><a href="#" onclick="changeContentCus('mrmain', 'mrdetail')">A 회의실</a></td>--%>
 	                                <%--                                        <td>5명</td>--%>
-	                                <%--                                        <td>김동철</td>--%>
+	                                <%--                                        <td>변의준</td>--%>
 	                                <%--                                        <td>사용 시간</td>--%>
 	                                <%--                                    </tr>--%>
 	                                </tbody>
@@ -193,24 +193,7 @@
 	                                    </c:if>
 	                                </ul>
 	                            </nav>
-	                            <%--                            <nav aria-label="Page navigation example">--%>
-	                            <%--                                <button type="button" class="btn btn-primary float-right clearfix" onclick="changeContentCus('mrmain', 'mrwrite')">예약</button>--%>
-	                            <%--                                <ul class="pagination justify-content-center">--%>
-	                            <%--                                    <li class="page-item">--%>
-	                            <%--                                        <a class="page-link" href="#" aria-label="Previous">--%>
-	                            <%--                                            <span aria-hidden="true">&laquo;</span>--%>
-	                            <%--                                        </a>--%>
-	                            <%--                                    </li>--%>
-	                            <%--                                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-	                            <%--                                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-	                            <%--                                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-	                            <%--                                    <li class="page-item">--%>
-	                            <%--                                        <a class="page-link" href="#" aria-label="Next">--%>
-	                            <%--                                            <span aria-hidden="true">&raquo;</span>--%>
-	                            <%--                                        </a>--%>
-	                            <%--                                    </li>--%>
-	                            <%--                                </ul>--%>
-	                            <%--                            </nav>--%>
+	                            
 	                        </div>
 	                    </div>
 	                </div>

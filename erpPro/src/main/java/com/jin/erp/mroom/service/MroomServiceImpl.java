@@ -21,4 +21,16 @@ public class MroomServiceImpl implements MroomService{
 	public List<MroomVO> mrview(MroomVO mroomVO){
 		return mroomDAO.mrview(mroomVO);
 	}
+	
+	public MroomVO mrdetail(int mrNo) {
+		return mroomDAO.mrdetail(mrNo);
+	}
+	
+	public int mrModify(MroomVO mroomVO) {
+		return mroomDAO.mrModify(mroomVO);
+	}
+	
+	public int mrdelete(MroomVO mroomVO) {
+		return mroomDAO.mrDelete(mroomVO);
+	}
 }
