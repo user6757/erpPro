@@ -141,8 +141,8 @@
     </div>
 </div>
 <br>
-	<button id="mr-list" type="button" class="btn btn-primary" onclick="mroomlistpath()">목록</button>
-	<button id="mr-del" type="button" class="btn btn-danger" style="float: right; margin-left: 10px" onclick="deleteM(${m.mrNo})">삭제</button>
+	<button id="mr-list" type="button" class="btn btn-primary" onclick="javascript:location.href='/mroom/mrlist'">목록</button>
+	<button id="mr-del" type="button" class="btn btn-danger" style="float: right; margin-left: 10px" onclick="deleteM(${mr.mrNo})">삭제</button>
 	<button id="mr-mod" type="button" class="btn btn-warning" style="float: right; color: #ffffff" onclick="mroomModifypath()">수정</button>
 	
 	<br><br>
@@ -152,16 +152,16 @@
 
 <%-- 게시글 상세보기 --%>
 <script>
-    /* function deleteM(mrNo) {
+     function deleteM(mrNo) {
         $.ajax({
             type:"post",  //전송타입
-            url:"/mrmain/delete",//서버요청대상파일
+            url:"/mroom/delete",//서버요청대상파일
             data: {
                 mrNo : $("#mrNo").val(),
             },
             success: function (data) {
                 alert("삭제 성공!");
-                changeContentMr(mrNo);
+                window.location.href='/mroom/mrlist';
             },
             error: function (xhr, status, e) {
                 alert("삭제 실패");
@@ -170,12 +170,7 @@
                 console.log("status", status);
             }
         });
-    } */
-    
-    function mroomlistpath(){
-    	
-    	window.location.href='/mroom/mrlist';
-    }
+    } 
     
     function mroomModifypath(){
     	window.location.href='/mroom/mrmodify?mrNo=${mr.mrNo}';

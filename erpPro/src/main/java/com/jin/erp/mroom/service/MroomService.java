@@ -12,5 +12,5 @@ public interface MroomService {
 	public List<MroomVO> mrview(MroomVO mroomVO);
 	public MroomVO mrdetail(int mrNo);
 	public int mrModify(MroomVO mroomVO);
-
+	public int mrdelete(MroomVO mroomVO);
 }

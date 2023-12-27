@@ -64,14 +64,16 @@ public class MroomController {
 	
 	@RequestMapping(value="/mroom/update", method= RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> update(MroomVO mroomVO) {
-		
-		int result =  mroomService.mrModify(mroomVO);
-		if(result ==1) {
-			return new ResponseEntity<>("sucess", HttpStatus.OK);
-		}else {
-			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Object> update(MroomVO mroomVO) {
+		return mroomService.mrModify(mroomVO) == 1?
+				new ResponseEntity<>("sucess", HttpStatus.OK):new ResponseEntity<>("erorr", HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(value="/mroom/delete", method= RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Object> delete(MroomVO mroomVO) {
+		return mroomService.mrdelete(mroomVO) == 1?
+				new ResponseEntity<>("sucess", HttpStatus.OK):new ResponseEntity<>("erorr", HttpStatus.BAD_REQUEST);
 	}
 
 }

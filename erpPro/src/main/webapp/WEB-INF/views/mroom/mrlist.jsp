@@ -93,6 +93,7 @@
 <body>
 	<%@ include file="../include/header.jsp" %>
 	
+	<br><br><br><br><br><br>
 	<!-- Begin Page Content 오른쪽 가운데 안에 들어가는 내용들의 전체 박스-->
 	<!-- Page Heading 회의실관리 목록 제목 설정-->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -108,10 +109,11 @@
 	
 	        <select class="form-select" name="type" id="search-type">
 	            <option value="title">제목</option>
-	            <%--            <option value="content">내용</option>--%>
-	            <%--            <option value="writer">작성자</option>--%>
-	            <%--            <option value="tc">제목+내용</option>--%>
+	              <option value="content">내용</option> 
+	               <option value="writer">작성자</option>
+	               <option value="tc">제목+내용</option> 
 	        </select>
+	        <br>
 	
 	        <input style="width: 100%; padding: 10px 20px; margin: 5px 0; box-sizing: border-box;" type="text" class="form-control" name="keyword" placeholder="입력해주세요!" value="${s.keyword}">
 	
@@ -164,7 +166,7 @@
 	                                <%--                                        <th scope="row">1</th> mrNo - 글 작성 번호--%>
 	                                <%--                                        <td><a href="#" onclick="changeContentCus('mrmain', 'mrdetail')">A 회의실</a></td>--%>
 	                                <%--                                        <td>5명</td>--%>
-	                                <%--                                        <td>김동철</td>--%>
+	                                <%--                                        <td>변의준</td>--%>
 	                                <%--                                        <td>사용 시간</td>--%>
 	                                <%--                                    </tr>--%>
 	                                </tbody>

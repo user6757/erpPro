@@ -29,4 +29,8 @@ public class MroomServiceImpl implements MroomService{
 	public int mrModify(MroomVO mroomVO) {
 		return mroomDAO.mrModify(mroomVO);
 	}
+	
+	public int mrdelete(MroomVO mroomVO) {
+		return mroomDAO.mrDelete(mroomVO);
+	}
 }

@@ -29,5 +29,9 @@ public class MroomDAOImpl implements MroomDAO{
 	public int mrModify(MroomVO mroomVO) {
 		return sqlSession.update("mrmodify", mroomVO);
 	}
+	
+	public int mrDelete(MroomVO mroomVO) {
+		return sqlSession.delete("mrdelete", mroomVO);
+	}
 
 }

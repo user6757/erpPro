@@ -148,7 +148,7 @@
 	                </div>
 	                <div>
 	                    <button id="mr-save" style="float: right" type="button" onclick="modifyM(${mrDTO.mrNo})" class="btn btn-primary">저장</button>
-	                    <button type="button" class="btn btn-primary" onclick="mroomlistpath()">목록</button>
+	                    <button type="button" class="btn btn-primary" onclick="javascript: location.href='/mroom/mrlist'">목록</button>
 	                </div>
 	            </div>
 	        </form>
@@ -158,27 +158,21 @@
 </body>
 <script>
     // 게시물 등록 입력값 검증 함수
-    function mrValidateFormValue() {
-        //용 입력 태그
-        const $mrCon = $("#mr-con");
-            // document.getElementById('mr-con');
+   /*  function mrValidateFormValue() {
+        const $mrCon = $("#mrContent");
         let flag = false; // 입력 제대로 하면 true로 변경
-
-        console.log('c: ', $mrCon);
-
-        if ($mrCon.value.trim() === '') {
+        console.log('c', $mrCon.text());
+        if ($mrCon.text() == '' && $mrCon.text() == null) {
             alert('내용은 필수 입니다.');
+            flag = false;
         } else {
             flag = true;
         }
-
         console.log('flag: ', flag);
-
         return flag;
-    }
-
+    } */
     // 게시물 입력값 검증
-    const $mrSave = $("#mr-save");
+    /* const $mrSave = $("#mr-save");
         // document.getElementById('mr-save');
 
     $mrSave.onclick = e => {
@@ -190,13 +184,17 @@
         // 필수 입력값을 잘 채웠으면 폼을 서브밋한다
         const $mrFor = document.getElementById('mr-for');
         $mrFor.submit();
-    };
-
-    function mroomlistpath(){
-    	href.location='/mroom/mrlist';
-    }
+    }; */
 
     function modifyM(mrNo) {
+    	
+    	const $mrCon = $("#mrContent");
+        
+        if ($mrCon.val() === '' || $mrCon.val() === null) {
+            alert('내용은 필수 입니다.');
+            return;
+        }
+    	
         $.ajax({
             type:"post",  //전송타입
             url:"/mroom/update",//서버요청대상파일

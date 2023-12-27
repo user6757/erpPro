@@ -133,7 +133,7 @@
 	                        <div class="input-group" style="margin-bottom: 30px">
 	                            <span class="input-group-text" id="mr-con">회의실 설명:</span>
 	                            <textarea class="form-control" aria-label="With textarea" rows="5"
-	                                      placeholder="사용하실 품목들을 입력해주세요." name="mrContent" id="mrContent"></textarea>
+	                                      placeholder="사용용도를 기입해주세요." name="mrContent" id="mrContent"></textarea>
 	                        </div>
 	                    </div>
 	                </div>
@@ -145,8 +145,8 @@
 	                    </div>
 	                </div>
 	                <div style="margin-left: 1px;">
-	                    <button style="float: right" type="submit" class="btn btn-primary" id="mr-save">저장</button>
-	                    <button type="button" class="btn btn-primary" onclick="changeContentCus('main', 'mrmain')">목록</button>
+	                    <button style="float: right" type="button" class="btn btn-primary" id="mr-save">저장</button>
+	                    <button type="button" class="btn btn-primary" onclick="javascript:location.href='/mroom/mrlist'">목록</button>
 	                </div>
 	            </div>
 	        </form>
@@ -158,22 +158,29 @@
     // 게시물 등록 입력값 검증 함수
     function mrValidateFormValue() {
         // 제목 입력 태그, 내용 입력 태그
-        const $mrTit = document.getElementById('mr-tit');
-        const $mrCon = document.getElementById('mr-con');
+        console.log('확');
+        const mrTit = document.getElementById('mrTitle');
+        const mrCon = document.getElementById('mrContent');
+        const mrUsers = document.getElementById('mrUsers');
+        const mrMax = document.getElementById('mrMax');
         let flag = false; // 입력 제대로 하면 true로 변경
 
-        console.log('t: ', $mrTit);
-        console.log('c: ', $mrCon);
+        console.log('t: ', mrTit.value.trim());
+        console.log('c: ', mrCon.value.trim());
 
-        if ($mrTit.value.trim() === '') {
-            alert('제목은 필수 입니다.');
-        } else if ($mrCon.value.trim() === '') {
-            alert('내용은 필수 입니다.');
-        } else {
+        if (mrTit.value.trim() === '' || mrTit.value.trim() == null) {
+            alert('회의실 명은 필수 입니다.');
+        }else if (mrMax.value.trim() === '' || mrMax.value.trim() == null) {
+            alert('최대인원은 필수 입니다.');
+        }else if (mrUsers.value.trim() === '' || mrUsers.value.trim() == null) {
+            alert('예약자명은 필수 입니다.');
+        }
+        else if (mrCon.value.trim() === '' || mrTit.value.trim() == null) {
+            alert('회의실 설명은 필수 입니다.');
+        }
+        else {
             flag = true;
         }
-
-        console.log('flag: ', flag);
 
         return flag;
     }
@@ -181,16 +188,18 @@
     // 게시물 입력값 검증
     const $mrSave = document.getElementById('mr-save');
 
-    $mrSave.onclick = function() {
+    $mrSave.onclick = e => {
+    	console.log('ssads');
         // 입력값을 제대로 채우지 않았는지 확인
-        if (!mrValidateFormValue()) {
-            return;
+        if(!mrValidateFormValue()){
+        	return;
         }
+        
 
         // 필수 입력값을 잘 채웠으면 폼을 서브밋한다
         const $mrFor = document.getElementById('mr-for');
         $mrFor.submit();
-    };
+    }; 
 </script>
 </html>
 

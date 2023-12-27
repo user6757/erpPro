@@ -36,8 +36,13 @@
 	</select>
 	
 	<update id="mrmodify">
-		update set mrContent=#{mrContent}
-		  from meetingroom
+		update meetingroom set mrContent = #{mrContent}
 		where mrNo = #{mrNo}	
 	</update>
+	
+	
+	<delete id="mrdelete">
+		 delete from meetingroom
+  	  		where mrNo = #{mrNo}
+	</delete>
 </mapper>
