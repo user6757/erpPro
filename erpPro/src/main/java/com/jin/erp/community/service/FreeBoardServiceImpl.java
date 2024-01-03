@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jin.erp.community.dao.FreeBoardDAO;
+import com.jin.erp.community.vo.FileVO;
 import com.jin.erp.community.vo.FreeBoardVO;
 import com.jin.erp.community.vo.Page;
 
@@ -66,6 +67,10 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	
 	public int freetotal() {
 		return freeDAO.freetotal();
+	}
+	
+	public int fileSave(FileVO fileVO) {
+		return 1;
 	}
 
 }

@@ -14,6 +14,8 @@ ALTER TABLE freeboard DROP COLUMN filename;
 
 ALTER TABLE freeboard ADD files VARCHAR(300);
 
+ALTER TABLE meetingroom modify mrTime int;
+
 CREATE TABLE erpmember (
     account VARCHAR(50),
     password VARCHAR(150) NOT NULL,

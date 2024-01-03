@@ -2,6 +2,8 @@ package com.jin.erp.community.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FreeBoardVO {
 	
 	private Integer seq;		//±Û¹øÈ£
@@ -17,6 +19,8 @@ public class FreeBoardVO {
 	private String type;
 	private int start;
 	private int limit;
+	private String files;
+	private MultipartFile uploadFile;
 	
 	public FreeBoardVO() {
 		limit=10;
@@ -106,6 +110,14 @@ public class FreeBoardVO {
 
 	public void setStrRegdate(String strRegdate) {
 		this.strRegdate = strRegdate;
+	}
+
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	
 }

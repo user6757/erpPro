@@ -29,8 +29,6 @@
                         <h2>회원가입</h2>
                     </div>
                     <div class="card-body">
-
-
                         <form action="/member/signup" name="signup" id="signUpForm" method="post"
                             style="margin-bottom: 0;">
 
@@ -48,9 +46,7 @@
                                             style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                             placeholder="숫자와 영어로 4-14자">
                                     </td>
-
                                 </tr>
-
                                 <tr>
                                     <td style="text-align: left">
                                         <p><strong>비밀번호를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="pwChk"></span></p>
@@ -76,7 +72,6 @@
                                             style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
                                             placeholder="비밀번호가 일치해야합니다."></td>
                                 </tr>
-
                                 <tr>
                                     <td style="text-align: left">
                                         <p><strong>이름을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="nameChk"></span></p>
@@ -88,7 +83,6 @@
                                             style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                             placeholder="한글로 최대 6자"></td>
                                 </tr>
-
                                 <tr>
                                     <td style="text-align: left">
                                         <p><strong>이메일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span>
@@ -101,7 +95,6 @@
                                             style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                             placeholder="ex) abc@mvc.com"></td>
                                 </tr>
-
                                 <tr>
                                     <td style="padding-top: 10px; text-align: center">
                                         <p><strong>회원가입하셔서 더 많은 서비스를 사용하세요~~!</strong></p>
@@ -122,7 +115,6 @@
         </div>
     </div>
     <script>
-    
         // 회원가입 폼 검증
         $(document).ready(function () {
             //입력값 검증 정규표현식

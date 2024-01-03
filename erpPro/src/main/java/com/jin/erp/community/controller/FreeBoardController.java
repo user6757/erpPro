@@ -1,6 +1,9 @@
 package com.jin.erp.community.controller;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jin.erp.HomeController;
 import com.jin.erp.community.service.FreeBoardServiceImpl;
+import com.jin.erp.community.vo.FileVO;
 import com.jin.erp.community.vo.FreeBoardVO;
 import com.jin.erp.community.vo.Page;
+import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class FreeBoardController {
@@ -30,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public String freelist(Model model, FreeBoardVO freeBoardVO, HttpServletRequest request) {
 		
 		Page paging = new Page();
-
+		
 		if(request.getParameter("page") != null) {
 			paging.setPage(Integer.parseInt(request.getParameter("page")));
 		}
@@ -60,8 +65,39 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value="/free/save", method=RequestMethod.POST)
-	public String freesave(FreeBoardVO freeBoardVO, HttpServletRequest request) {
-		System.out.println("파일:"+ freeBoardVO.getFilename());
+	public String freesave(FreeBoardVO freeBoardVO, HttpServletRequest request) throws Exception{
+		String savefolder=request.getRealPath("/resources/upload");
+		System.out.println("파일:"+ savefolder);
+		int fileSize = 5*1024*1024;
+		MultipartRequest multi = new MultipartRequest(request,savefolder,fileSize, "UTF-8");
+		File upFile = multi.getFile("files");
+		
+		if(upFile != null) {
+			String fileName = upFile.getName();
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH)+1;
+			int date = cal.get(Calendar.DATE);
+			String homedir = savefolder+"/"+year+"-"+month+"-"+date;
+			File path = new File(homedir);
+			if(!path.exists()) {
+				path.mkdir();
+			}
+			
+			Random ran = new Random();
+			int random = ran.nextInt(1000000000);
+			
+			int index = fileName.lastIndexOf(".");
+			
+			String fileException = fileName.substring(index+1);
+			
+			String refileName = "member"+year+month+date+random+"."+fileException;
+			String fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
+			upFile.renameTo(new File(homedir+"/"+refileName));
+			FileVO fileVO = new FileVO();
+			fileVO.setFileName(fileDBName);
+			fileVO.setBno(freeBoardVO.getSeq());
+		}
 		freeBoardService.insertBoard(freeBoardVO);
 		Page paging = new Page();
 

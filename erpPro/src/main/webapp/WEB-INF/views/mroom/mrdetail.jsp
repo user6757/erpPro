@@ -4,7 +4,6 @@
 <html lang="ko">
 <head>
     <%@ include file="../include/static-head.jsp" %>
-
     <style>
         .board-list {
             width: 70%;
@@ -89,31 +88,19 @@
 
     </style>
 </head>
-
 <body>
 	<%@ include file="../include/header.jsp" %>
 	<br><br><br><br><br><br>
-<div class="card-title">
-
-    <!-- Page Heading 회의실관리 상세 제목 설정-->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-left: 15px;">
-        <div class="border-bottom-1">
-            <h1 class="h3 mb-2 text-gray-700">회의실 관리 상세</h1>
-        </div>
-    </div>
-</div>
+	<div class="card-title">
+	    <!-- Page Heading 회의실관리 상세 제목 설정-->
+	    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-left: 15px;">
+	        <div class="border-bottom-1">
+	            <h1 class="h3 mb-2 text-gray-700">회의실 관리 상세</h1>
+	        </div>
+	    </div>
+	</div>
 <!-- 구분 선 속성-->
 <hr class="sidebar-divider d-none d-md-block">
-<!-- 이미지 속성 -->
-<%--<div style="text-align: center; margin-bottom: 0.7em">--%>
-<%--    <img src="${pageContext.request.contextPath}/img/mrimg/mr1.jpg" alt="A 회의실"/>--%>
-<%--</div>--%>
-<%--<div style="text-align: center; margin-bottom: 0.7em">--%>
-<%--    <img src="${pageContext.request.contextPath}/img/mrimg/mr2.jpg" alt="B 회의실"/>--%>
-<%--</div>--%>
-<%--<div style="text-align: center; margin-bottom: 0.7em">--%>
-<%--    <img src="${pageContext.request.contextPath}/img/mrimg/mr3.png" alt="C 회의실"/>--%>
-<%--</div>--%>
 <br>
 <form action="/mrmain/delete" method="post">
     <input type="hidden" value="${mr.mrNo}" name="mrNo" id="mrNo">
@@ -148,8 +135,6 @@
 	<br><br>
 	<%@ include file="../include/footer.jsp" %>
 </body>
-
-
 <%-- 게시글 상세보기 --%>
 <script>
      function deleteM(mrNo) {

@@ -85,5 +85,9 @@
   		 count(*)
   		from freeboard
   </select>
+  
+  <insert id="">
+  
+  </insert>
 
 </mapper>

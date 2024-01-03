@@ -163,43 +163,39 @@
         const mrCon = document.getElementById('mrContent');
         const mrUsers = document.getElementById('mrUsers');
         const mrMax = document.getElementById('mrMax');
+        const mrTime = document.getElementById('mrTime');
         let flag = false; // 입력 제대로 하면 true로 변경
-
         console.log('t: ', mrTit.value.trim());
         console.log('c: ', mrCon.value.trim());
-
         if (mrTit.value.trim() === '' || mrTit.value.trim() == null) {
             alert('회의실 명은 필수 입니다.');
         }else if (mrMax.value.trim() === '' || mrMax.value.trim() == null) {
             alert('최대인원은 필수 입니다.');
         }else if (mrUsers.value.trim() === '' || mrUsers.value.trim() == null) {
             alert('예약자명은 필수 입니다.');
-        }
-        else if (mrCon.value.trim() === '' || mrTit.value.trim() == null) {
+        }else if (mrCon.value.trim() === '' || mrCon.value.trim() == null) {
             alert('회의실 설명은 필수 입니다.');
+        }else if (mrTime.value.trim() === '' || mrTime.value.trim() == null) {
+            alert('사용시간은 필수 입니다.');
         }
         else {
             flag = true;
         }
-
         return flag;
     }
-
     // 게시물 입력값 검증
     const $mrSave = document.getElementById('mr-save');
-
     $mrSave.onclick = e => {
     	console.log('ssads');
         // 입력값을 제대로 채우지 않았는지 확인
         if(!mrValidateFormValue()){
         	return;
         }
-        
-
         // 필수 입력값을 잘 채웠으면 폼을 서브밋한다
         const $mrFor = document.getElementById('mr-for');
         $mrFor.submit();
-    }; 
+    };
+    
 </script>
 </html>
 

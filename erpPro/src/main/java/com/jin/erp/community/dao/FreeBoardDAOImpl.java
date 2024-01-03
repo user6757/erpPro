@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jin.erp.community.vo.FileVO;
 import com.jin.erp.community.vo.FreeBoardVO;
 
 @Repository
@@ -42,5 +43,9 @@ public class FreeBoardDAOImpl implements FreeBoardDAO{
 	
 	public int freetotal() {
 		return sqlSession.selectOne("freetotal");
+	}
+	
+	public int fileSave(FileVO fileVO) {
+		return sqlSession.insert("filesave", fileVO);
 	}
 }
