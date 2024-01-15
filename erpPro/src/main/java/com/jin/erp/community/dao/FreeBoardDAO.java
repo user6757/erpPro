@@ -15,12 +15,14 @@ public interface FreeBoardDAO {
 	
 	public int editBoard(FreeBoardVO freeVO);
 	
-	public FreeBoardVO detailboard(FreeBoardVO freeVO);
+	public FreeBoardVO detailboard(FreeBoardVO freeVO)throws Exception;
 	
 	public int deleteBoard(int seq);
 	
 	public int freetotal();
 	
 	public int fileSave(FileVO fileVO);
+	
+	public FileVO filesearch(int seq)throws NullPointerException;
 
 }

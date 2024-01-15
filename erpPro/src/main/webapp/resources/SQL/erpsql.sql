@@ -38,6 +38,29 @@ CREATE TABLE meetingroom (
     fileNo number(5)
 );
 
+-- 첨부파일 정보를 가지는 테이블 생성
+CREATE TABLE erpFileUpload (
+    fileName VARCHAR2(150), -- /2022/08/01/asdjlfkasjfd_상어.jpg
+    regDate DATE DEFAULT SYSDATE,
+    bNo NUMBER(10) NOT NULL
+);
+
+
+ALTER TABLE freeboard DROP CONSTRAINT seq;
+
+ALTER TABLE erpFileUpload
+ADD CONSTRAINT pkFileName
+PRIMARY KEY (fileName);
+
+ALTER TABLE erpFileUpload
+ADD CONSTRAINT fkFileUpload
+FOREIGN KEY (bno)
+REFERENCES freeboard (seq)
+ON DELETE CASCADE;
+
+commit;
+
+drop table erpFileUpload;
 
 create table qnaboard(
  qnano number(5) PRIMARY KEY,
@@ -52,6 +75,7 @@ commit;
 
 select * from freeboard;
 select * from qnaboard;
+select * from erpFileUpload;
 
 CREATE SEQUENCE meetingroom_mrNo --시퀀스이름 WDRL_SEQ
 INCREMENT BY 1 --증감숫자 1

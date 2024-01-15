@@ -55,9 +55,9 @@
   	 cnt)
   	  values(
   	 freeboard_seq.nextval,
-  	    #{title},
-  	    #{writer},
-  	    #{content},
+  	    #{title, jdbcType=VARCHAR},
+  	    #{writer, jdbcType=VARCHAR},
+  	    #{content, jdbcType=VARCHAR},
   	    sysdate,
   	    #{cnt})
   </insert>
@@ -86,8 +86,25 @@
   		from freeboard
   </select>
   
-  <insert id="">
-  
+  <insert id="filesave" parameterType="filevo">
+  	insert
+  	 into erpFileUpload(
+  	 	fileName,
+  	 	regDate,
+  	 	bno
+  	)values(
+  	    #{fileName},
+  	    sysdate,
+  	    #{bno}
+  	 )
   </insert>
+  
+  <select id="filesearch" resultType="filevo">
+  		select 
+  		  fileName, regDate, bNo
+  		from erpFileUpload
+  		where bNo = #{seq}
+  		 
+  </select>
 
 </mapper>

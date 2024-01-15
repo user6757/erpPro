@@ -11,6 +11,7 @@ import com.jin.erp.community.dao.FreeBoardDAO;
 import com.jin.erp.community.vo.FileVO;
 import com.jin.erp.community.vo.FreeBoardVO;
 import com.jin.erp.community.vo.Page;
+import com.oreilly.servlet.MultipartRequest;
 
 @Service
 public class FreeBoardServiceImpl implements FreeBoardService{
@@ -46,8 +47,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return setregdate.format(date);
 	}
 	
-	public int insertBoard(FreeBoardVO freeVO) {
+	public int insertBoard(FreeBoardVO freeVO, MultipartRequest multipart) {
 		freeVO.setCnt(0);
+		freeVO.setTitle(multipart.getParameter("title"));
+		freeVO.setWriter(multipart.getParameter("writer"));
+		freeVO.setContent(multipart.getParameter("content"));
 		return freeDAO.insertBoard(freeVO);
 	}
 	
@@ -55,10 +59,15 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeDAO.editBoard(freeVO);
 	}
 	
-	public FreeBoardVO detailboard(FreeBoardVO freeVO) {
-		FreeBoardVO freeBoardVO = freeDAO.detailboard(freeVO);
-		freeBoardVO.setStrRegdate(strdate(freeBoardVO));
-		return freeBoardVO;
+	public FreeBoardVO detailboard(FreeBoardVO freeBoardVO) throws Exception{
+		FreeBoardVO dbfreeboardVO = freeDAO.detailboard(freeBoardVO);
+		FileVO fileVO = freeDAO.filesearch(dbfreeboardVO.getSeq());
+		if(fileVO.getBno() > 0) {
+			dbfreeboardVO.setFilename(fileVO.getFileName());
+		}else {
+			dbfreeboardVO.setStrRegdate(strdate(dbfreeboardVO));
+		}
+		return dbfreeboardVO;
 	}
 	
 	public int deleteBoard(int seq) {
@@ -69,8 +78,17 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeDAO.freetotal();
 	}
 	
-	public int fileSave(FileVO fileVO) {
-		return 1;
+	public FileVO fileSave(FileVO fileVO) {
+		if(freeDAO.fileSave(fileVO)==1) {
+			fileVO = freeDAO.filesearch(fileVO.getBno());
+			return fileVO;
+		}else {
+			return null;
+		}
+	}
+	
+	public FileVO filesearch(int seq)throws NullPointerException{
+		return freeDAO.filesearch(seq);
 	}
 
 }

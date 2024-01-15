@@ -34,7 +34,7 @@
     <div class="wrap">
         <%@ include file="../../include/header.jsp" %>
         <div class="write-container">
-            <form id="write-form" action="/free/save" method="post" autocomplete="off" enctype="multipart/form-data">
+            <form id="write-form" action="/free/save" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="writer-input" class="form-label">작성자</label>
                     <input type="text" class="form-control" id="writer-input" placeholder="이름" name="writer"
@@ -65,19 +65,22 @@
             // 이름입력태그, 제목 입력태그
             const $writerInput = document.getElementById('writer-input');
             const $titleInput = document.getElementById('title-input');
+            const $contentInput = document.getElementById('exampleFormControlTextarea1');
             let flag = false; // 입력 제대로하면 true로 변경
 
             console.log('w: ', $writerInput.value);
             console.log('t: ', $titleInput.value);
 
             if ($writerInput.value.trim() === '') {
-                alert('작성자는 필수값입니다~');
+                alert('작성자는 필수값입니다.');
             } else if ($titleInput.value.trim() === '') {
-                alert('제목은 필수값입니다~');
-            } else {
+                alert('제목은 필수값입니다.');
+            }else if ($contentInput.value.trim() === '') {
+                alert('내용은 필수값입니다.');
+            }
+            else {
                 flag = true;
             }
-
             return flag;
         }
         // 게시물 입력값 검증
@@ -88,7 +91,6 @@
             if (!validateFormValue()) {
                 return;
             }
-
             // 필수 입력값을 잘 채웠으면 폼을 서브밋한다.
             const $form = document.getElementById('write-form');
             $form.submit();

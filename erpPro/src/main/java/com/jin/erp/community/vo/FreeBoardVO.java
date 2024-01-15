@@ -2,8 +2,6 @@ package com.jin.erp.community.vo;
 
 import java.util.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class FreeBoardVO {
 	
 	private Integer seq;		//글번호
@@ -13,14 +11,13 @@ public class FreeBoardVO {
 	private Date regdate;		//작성날짜
 	private String strRegdate;
 	private Integer cnt;		//조회수
-	private String filename;
-	private String filedate;
 	private String keyword;
 	private String type;
+	private String filename;
+	private Date fileregdate;
+	private int bno;
 	private int start;
 	private int limit;
-	private String files;
-	private MultipartFile uploadFile;
 	
 	public FreeBoardVO() {
 		limit=10;
@@ -88,22 +85,6 @@ public class FreeBoardVO {
 		this.type = type;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	public String getFiledate() {
-		return filedate;
-	}
-
-	public void setFiledate(String filedate) {
-		this.filedate = filedate;
-	}
-
 	public String getStrRegdate() {
 		return strRegdate;
 	}
@@ -112,12 +93,28 @@ public class FreeBoardVO {
 		this.strRegdate = strRegdate;
 	}
 
-	public MultipartFile getUploadFile() {
-		return uploadFile;
+	public String getFilename() {
+		return filename;
 	}
 
-	public void setUploadFile(MultipartFile uploadFile) {
-		this.uploadFile = uploadFile;
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public Date getFileregdate() {
+		return fileregdate;
+	}
+
+	public void setFileregdate(Date fileregdate) {
+		this.fileregdate = fileregdate;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	
 }
