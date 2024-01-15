@@ -2,17 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ include file="../../include/static-head.jsp" %>
-
     <style>
         .content-container {
             width: 60%;
             margin: 150px auto;
             position: relative;
         }
-
         .content-container .main-title {
             font-size: 24px;
             font-weight: 700;
@@ -22,7 +19,6 @@
             width: fit-content;
             margin: 20px auto 30px;
         }
-
         .content-container .main-content {
             border: 2px solid #ccc;
             border-radius: 20px;
@@ -31,14 +27,12 @@
             text-align: justify;
             min-height: 400px;
         }
-
         .content-container .custom-btn-group {
             position: absolute;
             bottom: -10%;
             left: 50%;
             transform: translateX(-50%);
         }
-
         /* 페이지 액티브 기능 */
         .pagination .page-item.p-active a {
             background: #333 !important;
@@ -46,17 +40,13 @@
             cursor: default;
             pointer-events: none;
         }
-
         .pagination .page-item:hover a {
             background: #888 !important;
             color: #fff !important;
         }
-
-
         .uploaded-list {
             display: flex;
         }
-
         .img-sizing {
             display: block;
             width: 100px;
@@ -64,15 +54,12 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="wrap">
         <%@ include file="../../include/header.jsp" %>
-
         <div class="content-container">
-
             <h1 class="main-title">${free.seq}번 게시물</h1>
+            <input type="hidden" name="seq" id="seq" value="${free.seq}">
 			<div class="mb-3">
 				<label for="exampleFormControlInput1" class="form-label">작성(수정)날짜</label>
 				<p>
@@ -95,15 +82,13 @@
                 <p class="main-content">
                     ${free.content}
                 </p>
-
             </div>
-
             <!-- 파일 첨부 영역 -->
-            <div class="form-group">
-                <ul class="uploaded-list">
-                </ul>
-            </div>
-
+            <c:if test="${free.filename != null || free.filename !=''}">
+            	<div class="form-group">
+                	<img alt="파일" src="../../resources/upload/${free.filename }">
+            	</div>
+            </c:if>
             <div class="btn-group btn-group-lg custom-btn-group" role="group">
 
                 <c:if test="${loginUser.account == b.account || loginUser.auth == 'ADMIN'}">
@@ -112,19 +97,15 @@
                 </c:if>
                 <button id="list-btn" type="button" class="btn btn-dark">목록</button>
             </div>
-
             <!-- 댓글 영역 -->
-
             <div id="replies" class="row">
                 <div class="offset-md-1 col-md-10">
                     <!-- 댓글 쓰기 영역 -->
                     <div class="card">
                         <div class="card-body">
-
                             <c:if test="${empty loginUser}">
                                 <a href="/member/sign-in">댓글은 로그인 후 작성 가능합니다.</a>
                             </c:if>
-
                             <c:if test="${not empty loginUser}">
                                 <div class="row">
                                     <div class="col-md-9">
@@ -148,14 +129,12 @@
                             </c:if>
                         </div>
                     </div> <!-- end reply write -->
-
                     <!--댓글 내용 영역-->
                     <div class="card">
                         <!-- 댓글 내용 헤더 -->
                         <div class="card-header text-white m-0" style="background: #343A40;">
                             <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
                         </div>
-
                         <!-- 댓글 내용 바디 -->
                         <div id="replyCollapse" class="card">
                             <div id="replyData">
@@ -163,7 +142,6 @@
 								< JS로 댓글 정보 DIV삽입 > 
 							-->
                             </div>
-
                             <!-- 댓글 페이징 영역 -->
                             <ul class="pagination justify-content-center">
                                 <!-- 
@@ -174,7 +152,6 @@
                     </div> <!-- end reply content -->
                 </div>
             </div> <!-- end replies row -->
-
             <!-- 댓글 수정 모달 -->
             <div class="modal fade bd-example-modal-lg" id="replyModifyModal">
                 <div class="modal-dialog modal-lg">
@@ -185,7 +162,6 @@
                             <h4 class="modal-title">댓글 수정하기</h4>
                             <button type="button" class="close text-white" data-bs-dismiss="modal">X</button>
                         </div>
-
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="form-group">
@@ -205,22 +181,13 @@
                     </div>
                 </div>
             </div>
-
             <!-- end replyModifyModal -->
-
-
-
         </div>
-
-
         <%@ include file="../../include/footer.jsp" %>
     </div>
-
-
     <!-- 게시글 상세보기 관련 script -->
     <script>
         // const [$modBtn, $delBtn, $listBtn] = [...document.querySelector('div[role=group]').children];
-
         const $modBtn = document.getElementById('mod-btn');
         const $delBtn = document.getElementById('del-btn');
         const $listBtn = document.getElementById('list-btn');
@@ -231,9 +198,7 @@
                 location.href = '/free/modify?seq=${free.seq}';
             };
         }
-
         if ($delBtn !== null) {
-
             //삭제버튼
             $delBtn.onclick = e => {
                 if (!confirm('정말 삭제하시겠습니까?')) {
@@ -247,22 +212,16 @@
             location.href = '/free/list';
         };
     </script>
-
-
     <!-- 댓글관련 script -->
     <script>
-
         // 로그인한 회원 계정명
         const currentAccount = '${loginUser.account}';
         const auth = '${loginUser.auth}';
-
         //원본 글 번호
         const bno = '${b.boardNo}';
         // console.log('bno:', bno);
-
         // 댓글 요청 URL
         const URL = '/api/v1/replies';
-
         //날짜 포맷 변환 함수
         function formatDate(datetime) {
             //문자열 날짜 데이터를 날짜객체로 변환
@@ -297,8 +256,6 @@
             (minute < 10) ? minute = '0' + minute: minute;
             return year + "-" + month + "-" + day + " " + ampm + " " + hour + ":" + minute;
         }
-
-
         // 댓글 페이지 태그 생성 렌더링 함수
         function makePageDOM(pageInfo) {
             let tag = "";
@@ -331,11 +288,7 @@
 
             // ul에 마지막페이지 번호 저장.
             $pageUl.dataset.fp = pageInfo.finalPage;
-
-
         }
-
-
         // 댓글 목록 DOM을 생성하는 함수
         function makeReplyDOM({
             replyList,
@@ -372,20 +325,13 @@
                         " </div>";
                 }
             }
-
             // 댓글 목록에 생성된 DOM 추가
             document.getElementById('replyData').innerHTML = tag;
-
             // 댓글 수 배치
             document.getElementById('replyCnt').textContent = count;
-
             // 페이지 렌더링
             makePageDOM(maker);
-
-
-
         }
-
         // 댓글 목록을 서버로부터 비동기요청으로 불러오는 함수
         function showReplies(pageNum = 1) {
 
@@ -396,7 +342,6 @@
                     makeReplyDOM(replyMap);
                 });
         }
-
         // 페이지 버튼 클릭이벤트 등록 함수
         function makePageButtonClickEvent() {
             // 페이지 버튼 클릭이벤트 처리
@@ -413,27 +358,20 @@
                 showReplies(pageNum);
             };
         }
-
         // 댓글 등록 이벤트 처리 핸들러 등록 함수
         function makeReplyRegisterClickEvent() {
-
             document.getElementById('replyAddBtn').onclick = makeReplyRegisterClickHandler;
         }
-
-
         // 댓글 등록 이벤트 처리 핸들러 함수
         function makeReplyRegisterClickHandler(e) {
-
             const $writerInput = document.getElementById('newReplyWriter');
             const $contentInput = document.getElementById('newReplyText');
-
             // 서버로 전송할 데이터들
             const replyData = {
                 replyWriter: $writerInput.value,
                 replyText: $contentInput.value,
                 boardNo: bno
             };
-
             // POST요청을 위한 요청 정보 객체
             const reqInfo = {
                 method: 'POST',
@@ -458,12 +396,9 @@
                     }
                 });
         }
-
         // 댓글 수정화면 열기 상세처리
         function processModifyShow(e, rno) {
-
             // console.log('수정버튼 클릭함!! after');
-
             // 클릭한 버튼 근처에 있는 댓글 내용텍스트를 얻어온다.
             const replyText = e.target.parentElement.parentElement.firstElementChild.textContent;
             console.log('수정 댓글내용:', replyText);
@@ -475,34 +410,34 @@
             const $modal = document.querySelector('.modal');
             $modal.dataset.rno = rno;
         }
-
         // 댓글 삭제 상세처리
         function processRemove(rno) {
             if (!confirm('진짜로 삭제합니까??')) return;
-
-            fetch(URL + '/' + rno, {
-                    method: 'DELETE'
-                })
-                .then(res => res.text())
-                .then(msg => {
-                    if (msg === 'del-success') {
-                        alert('삭제 성공!!');
-                        showReplies(); // 댓글 새로불러오기
-                    } else {
-                        alert('삭제 실패!!');
-                    }
-                });
+        	
+            $.ajax({
+                type:"post",  //전송타입
+                url:"/free/delete",//서버요청대상파일
+                data: {
+                    seq : $("#seq").val()
+                },
+                success: function (data, status, xhr) {
+                    console.log(data);
+                    alert("게시글 삭제가 완료 되었습니다.");
+                    window.location.href='/free/list;
+                },
+                error: function (xhr, status, e) {
+                    alert("수정 실패");
+                    console.log("xhr", xhr);
+                    console.log("error", e);
+                    console.log("status", status);
+                }
+            });
         }
-
-
         // 댓글 수정화면 열기, 삭제 처리 핸들러 정의
         function makeReplyModAndDelHandler(e) {
-
             const rno = e.target.parentElement.parentElement.parentElement.dataset.replyid;
             console.log('mod get rno: ', rno);
-
             e.preventDefault();
-
             // console.log('수정버튼 클릭함!! before');
             if (e.target.matches('#replyModBtn')) {
                 processModifyShow(e, rno);
@@ -510,19 +445,15 @@
                 processRemove(rno);
             }
         }
-
         // 댓글 수정 화면 열기, 삭제 이벤트 처리
         function openModifyModalAndRemoveEvent() {
 
             const $replyData = document.getElementById('replyData');
             $replyData.onclick = makeReplyModAndDelHandler;
         }
-
         // 댓글 수정 비동기 처리 이벤트
         function replyModifyEvent() {
-
             const $modal = $('#replyModifyModal');
-
             document.getElementById('replyModBtn').onclick =
                 e => {
                     // console.log('수정 완료 버튼 클릭!');
@@ -541,8 +472,6 @@
                             replyNo: rno
                         })
                     };
-
-
                     fetch(URL + '/' + rno, reqInfo)
                         .then(res => res.text())
                         .then(msg => {
@@ -556,33 +485,20 @@
                         });
                 };
         }
-
-
-
         // 메인 실행부
         (function () {
-
             // 초기 화면 렌더링시 댓글 1페이지 렌더링
             showReplies();
-
             // 댓글 페이지 버튼 클릭이벤트 처리
             makePageButtonClickEvent();
-
             // 댓글 등록 버튼 클릭이벤트 처리
             makeReplyRegisterClickEvent();
-
             // 댓글 수정 모달 오픈, 삭제 이벤트 처리
             openModifyModalAndRemoveEvent();
-
             // 댓글 수정 완료 버튼 이벤트 처리
             replyModifyEvent();
-
-
-
-
         })();
     </script>
-
     <script>
         // start JQuery 
         $(document).ready(function () {
@@ -592,7 +508,6 @@
                 const pattern = /jpg$|gif$|png$/i;
                 return originFileName.match(pattern);
             }
-
             // 파일의 확장자에 따른 렌더링 처리
             function checkExtType(fileName) {
 
@@ -601,7 +516,6 @@
 
                 //확장자 추출후 이미지인지까지 확인
                 if (isImageFile(originFileName)) { // 파일이 이미지라면
-
                     const $img = document.createElement('img');
                     $img.classList.add('img-sizing');
                     $img.setAttribute('src', '/loadFile?fileName=' + fileName);
@@ -611,7 +525,6 @@
 
                 // 이미지가 아니라면 다운로드 링크를 생성
                 else {
-
                     const $a = document.createElement('a');
                     $a.setAttribute('href', '/loadFile?fileName=' + fileName);
 
@@ -622,25 +535,17 @@
 
                     $a.append($img);
                     $a.innerHTML += '<span>' + originFileName + '</span>';
-
                     $('.uploaded-list').append($a);
-
                 }
-
-
             }
-
-
             // 드롭한 파일을 화면에 보여주는 함수
             function showFileData(fileNames) {
-
                 // 이미지인지? 이미지가 아닌지에 따라 구분하여 처리
                 // 이미지면 썸네일을 렌더링하고 아니면 다운로드 링크를 렌더링한다.
                 for (let fileName of fileNames) {
                     checkExtType(fileName);
                 }
             }
-
             // 파일 목록 불러오기
             function showFileList() {
                 fetch('/board/file/' + bno)
@@ -649,15 +554,9 @@
                         showFileData(fileNames);
                     });
             }
-
             showFileList();
-
-
-
         });
         // end jQuery
     </script>
-
 </body>
-
 </html>

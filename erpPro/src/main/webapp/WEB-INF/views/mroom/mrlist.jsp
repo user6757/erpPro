@@ -151,10 +151,6 @@
 	                                        <td>${m.mrNo}</td>
 	                                        <td><a href="/mroom/mrdetail?mrNo=${m.mrNo }">
 	                                                ${m.mrTitle}
-	                                                <%--                                                ${m.shortTitle}--%>
-	                                            <%-- <c:if test="${m.mrNewArticle}">
-	                                                <span class="badge rounded-pill bg-danger">new</span>
-	                                            </c:if></a> --%>
 	                                        </td>
 	                                        <td>${m.mrMax}</td>
 	                                        <td>${m.mrUsers}</td>
@@ -162,13 +158,6 @@
 	                                        <td>${m.mrRegDate}</td>
 	                                    </tr>
 	                                </c:forEach>
-	                                <%--                                    <tr>--%>
-	                                <%--                                        <th scope="row">1</th> mrNo - 글 작성 번호--%>
-	                                <%--                                        <td><a href="#" onclick="changeContentCus('mrmain', 'mrdetail')">A 회의실</a></td>--%>
-	                                <%--                                        <td>5명</td>--%>
-	                                <%--                                        <td>변의준</td>--%>
-	                                <%--                                        <td>사용 시간</td>--%>
-	                                <%--                                    </tr>--%>
 	                                </tbody>
 	                            </table>
 	                            <nav aria-label="Page navigation example">

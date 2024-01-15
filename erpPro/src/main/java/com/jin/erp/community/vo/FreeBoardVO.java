@@ -11,10 +11,11 @@ public class FreeBoardVO {
 	private Date regdate;		//작성날짜
 	private String strRegdate;
 	private Integer cnt;		//조회수
-	private String filename;
-	private String filedate;
 	private String keyword;
 	private String type;
+	private String filename;
+	private Date fileregdate;
+	private int bno;
 	private int start;
 	private int limit;
 	
@@ -84,6 +85,14 @@ public class FreeBoardVO {
 		this.type = type;
 	}
 
+	public String getStrRegdate() {
+		return strRegdate;
+	}
+
+	public void setStrRegdate(String strRegdate) {
+		this.strRegdate = strRegdate;
+	}
+
 	public String getFilename() {
 		return filename;
 	}
@@ -92,20 +101,20 @@ public class FreeBoardVO {
 		this.filename = filename;
 	}
 
-	public String getFiledate() {
-		return filedate;
+	public Date getFileregdate() {
+		return fileregdate;
 	}
 
-	public void setFiledate(String filedate) {
-		this.filedate = filedate;
+	public void setFileregdate(Date fileregdate) {
+		this.fileregdate = fileregdate;
 	}
 
-	public String getStrRegdate() {
-		return strRegdate;
+	public int getBno() {
+		return bno;
 	}
 
-	public void setStrRegdate(String strRegdate) {
-		this.strRegdate = strRegdate;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jin.erp.community.vo.FileVO;
 import com.jin.erp.community.vo.FreeBoardVO;
 
 @Repository
@@ -31,7 +32,7 @@ public class FreeBoardDAOImpl implements FreeBoardDAO{
 				
 	}
 	
-	public FreeBoardVO detailboard(FreeBoardVO freeVO) {
+	public FreeBoardVO detailboard(FreeBoardVO freeVO) throws Exception{
 		return sqlSession.selectOne("freeone", freeVO);
 				
 	}
@@ -42,5 +43,17 @@ public class FreeBoardDAOImpl implements FreeBoardDAO{
 	
 	public int freetotal() {
 		return sqlSession.selectOne("freetotal");
+	}
+	
+	public int fileSave(FileVO fileVO) {
+		return sqlSession.insert("filesave", fileVO);
+	}
+	
+	public FileVO filesearch(int seq)throws NullPointerException{
+		return sqlSession.selectOne("filesearch", seq);
+	}
+	
+	public int fileEq(int seq) {
+		return sqlSession.selectOne("fileEq", seq);
 	}
 }
