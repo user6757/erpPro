@@ -106,5 +106,12 @@
   		where bNo = #{seq}
   		 
   </select>
+  
+  <select id="fileEq" resultType="int">
+  	SELECT COUNT(*)
+	  FROM erpFileUpload
+	WHERE bno = #{seq}
+  		
+  </select>
 
 </mapper>

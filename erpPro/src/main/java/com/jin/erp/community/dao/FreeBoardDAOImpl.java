@@ -52,4 +52,8 @@ public class FreeBoardDAOImpl implements FreeBoardDAO{
 	public FileVO filesearch(int seq)throws NullPointerException{
 		return sqlSession.selectOne("filesearch", seq);
 	}
+	
+	public int fileEq(int seq) {
+		return sqlSession.selectOne("fileEq", seq);
+	}
 }

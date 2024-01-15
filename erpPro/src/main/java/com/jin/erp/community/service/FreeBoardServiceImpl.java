@@ -38,7 +38,6 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 			}
 			return list;
 		}
-		
 	}
 	
 	private String strdate(FreeBoardVO freeBoardVO) {
@@ -61,12 +60,12 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	
 	public FreeBoardVO detailboard(FreeBoardVO freeBoardVO) throws Exception{
 		FreeBoardVO dbfreeboardVO = freeDAO.detailboard(freeBoardVO);
-		FileVO fileVO = freeDAO.filesearch(dbfreeboardVO.getSeq());
-		if(fileVO.getBno() > 0) {
+		int result = freeDAO.fileEq(dbfreeboardVO.getSeq());
+		if(result >0) {
+			FileVO fileVO = freeDAO.filesearch(dbfreeboardVO.getSeq());
 			dbfreeboardVO.setFilename(fileVO.getFileName());
-		}else {
-			dbfreeboardVO.setStrRegdate(strdate(dbfreeboardVO));
 		}
+		dbfreeboardVO.setStrRegdate(strdate(dbfreeboardVO));
 		return dbfreeboardVO;
 	}
 	
@@ -83,7 +82,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 			fileVO = freeDAO.filesearch(fileVO.getBno());
 			return fileVO;
 		}else {
-			return null;
+			return fileVO;
 		}
 	}
 	

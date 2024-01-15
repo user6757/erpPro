@@ -67,8 +67,9 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value="save", method=RequestMethod.POST)
-	public String freesave(FreeBoardVO freeBoardVO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) throws Exception{
-		
+	public String freesave(FreeBoardVO freeBoardVO, Model model,
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes) throws Exception{
 		String savefolder=request.getRealPath("/resources/upload");
 		int fileSize = 5*1024*1024;
 		MultipartRequest multi = new MultipartRequest(request, savefolder, fileSize, "UTF-8");
@@ -80,9 +81,8 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		List<FreeBoardVO> list = freeBoardService.listBoard(freeBoardVO, paging);
 		
 		for(FreeBoardVO freevo : list) {
-			
+			redirectAttributes.addAttribute("seq", freevo.getSeq());
 			if(upFile != null) {
-				
 				String fileName = upFile.getName();
 				Calendar cal = Calendar.getInstance();
 				int year = cal.get(Calendar.YEAR);
@@ -110,10 +110,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 				FileVO dBfileVO = freeBoardService.fileSave(fileVO);
 				freevo.setBno(dBfileVO.getBno());
 				freevo.setFilename(dBfileVO.getFileName());
-				redirectAttributes.addAttribute("seq", freevo.getSeq());
-				redirectAttributes.addAttribute("bno", freevo.getBno());
 			}
-			
 			return "redirect:/free/detail";
 		}
 		return "community/freeBoard/freeBoardwrite";
@@ -145,7 +142,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		return "community/freeBoard/freeBoardmodify";
 	}
 	
-	@RequestMapping(value="delete", method=RequestMethod.POST)
+	@RequestMapping(value="delete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String freedelete(int seq) {
 		return freeBoardService.deleteBoard(seq) ==1 ? "redirect:/free/list" : "community/freeBoard/freeBoardedit";
 	}
