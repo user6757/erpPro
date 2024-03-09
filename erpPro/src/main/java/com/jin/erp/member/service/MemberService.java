@@ -6,5 +6,6 @@ public interface MemberService {
 	
 	public int idcheck(String account);
 	public boolean singup(Member member) throws Exception;
+	public Member idsearch(Member member);
 
 }

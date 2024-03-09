@@ -12,11 +12,17 @@ public class MemberDAOImpl implements MemberDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Override
 	public int idcheck(String account) {
 		return sqlSession.selectOne("idcheck", account);
 	}
-	
+	@Override
 	public int singup(Member member) {
 		return sqlSession.insert("singup", member);
+	}
+	
+	@Override
+	public Member idsearch(Member member) {
+		return sqlSession.selectOne("idsearch", member);
 	}
 }

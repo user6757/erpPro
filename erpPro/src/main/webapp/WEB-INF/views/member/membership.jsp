@@ -4,16 +4,13 @@
 <html lang="ko">
 <head>
     <%@ include file="../include/static-head.jsp" %>
-
     <style>
         .wrap {
             margin: 200px auto;
         }
-
         .c-red {
             color: #e00;
         }
-
         .c-blue {
             color: rgb(25, 236, 120);
         }
@@ -101,8 +98,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 100%; text-align: center; colspan: 2;">
-                                        <input type="button" value="회원가입" class="btn form-control tooltipstered" id="signup-btn"
+                                    <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec"">
+                                        <input type="button" value="회원가입" class="btn form-control tooltipstered" id="signup-btn" name="signup-btn"
+                                            style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec"">
+                                        <input type="button" value="로그인" class="btn form-control tooltipstered" id="signup-btn" onclick="javascript: location.href='/member/login'"
                                             style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
                                     </td>
                                 </tr>
@@ -127,6 +131,8 @@
             // 입력값 검증 배열
             // 1: 아이디,  2: 비번, 3: 비번확인, 4: 이름, 5: 이메일
             const checkArr = [false, false, false, false, false];
+            
+            const $signbtn = $('signup-btn');
 
             // 1. 아이디 검증
             const $idInput = $('#user_id');

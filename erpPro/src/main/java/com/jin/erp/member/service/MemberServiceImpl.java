@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.idcheck(account);
 	}
 	
+	@Override
 	public boolean singup(Member member) throws Exception{
 		MessageDigest pw = MessageDigest.getInstance("SHA-512");
         pw.update(member.getPassword().getBytes("UTF-8"));
@@ -31,5 +32,10 @@ public class MemberServiceImpl implements MemberService{
         String password = sb.toString();
         member.setPassword(password);
 		return memberDAO.singup(member)==1 ? true : false;
+	}
+	
+	@Override
+	public Member idsearch(Member member) {
+		return memberDAO.idsearch(member);
 	}
 }

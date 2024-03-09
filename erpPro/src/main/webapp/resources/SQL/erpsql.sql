@@ -7,6 +7,14 @@ create table freeboard(
  cnt number(5) default 0
 );
 
+create table erpadmin(
+    admin_no number(38)
+    , admin_id varchar(50) primary key
+    , admin_pw varchar(200) not null
+    , admin_name varchar(30) not null
+    , admin_date date
+);
+
 ALTER TABLE freeboard ADD filename VARCHAR(100);
 ALTER TABLE freeboard ADD filedate VARCHAR(300);
 
@@ -45,6 +53,9 @@ CREATE TABLE erpFileUpload (
     bNo NUMBER(10) NOT NULL
 );
 
+delete from freeboard;
+
+delete from erpFileUpload;
 
 ALTER TABLE freeboard DROP CONSTRAINT seq;
 
@@ -72,10 +83,15 @@ create table qnaboard(
 );
 
 commit;
-
 select * from freeboard;
 select * from qnaboard;
 select * from erpFileUpload;
+select * from erpadmin;
+
+ALTER TABLE freeboard DROP COLUMN filedate;
+ALTER TABLE freeboard DROP COLUMN files;
+commit;
+insert into erpadmin values(1, 'admin', 'adminerp6757', '관리자', sysdate);
 
 CREATE SEQUENCE meetingroom_mrNo --시퀀스이름 WDRL_SEQ
 INCREMENT BY 1 --증감숫자 1
