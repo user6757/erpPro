@@ -19,4 +19,10 @@
 		values(#{account}, #{password}, #{name}, #{email}, sysdate)
 	</insert>
 	
+	<select id="idsearch" resultType="com.jin.erp.member.domain.Member">
+		SELECT *
+		  FROM ERPMEMBER
+		WHERE NAME=#{name} AND EMAIL = #{email}
+	</select>
+	
 </mapper>

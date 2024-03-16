@@ -6,4 +6,5 @@ public interface MemberDAO {
 	
 	public int idcheck(String account);
 	public int singup(Member member);
+	public Member idsearch(Member member);
 }
