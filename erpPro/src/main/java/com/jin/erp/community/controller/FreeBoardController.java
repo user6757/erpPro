@@ -39,6 +39,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	
 	@RequestMapping(value="list", method= {RequestMethod.POST, RequestMethod.GET})
 	public String freelist(Model model, FreeBoardVO freeBoardVO, HttpServletRequest request) {
+		System.out.println("ddsasdsa");
 		System.out.println("ssss");
 		Page paging = new Page();
 		if(request.getParameter("page") != null) {
