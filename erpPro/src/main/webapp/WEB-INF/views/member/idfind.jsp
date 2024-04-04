@@ -48,8 +48,8 @@
                             </tr>                                                                                 
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;">
-                                <input type="button" value="아이디찾기" class="btn form-control tooltipstered" id="idfind-btn"
-                                    style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
+                                <button value="아이디찾기" class="btn form-control tooltipstered" id="idfind-btn"
+                                    style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8"></button>
                                 </td>
                             </tr>
                              <tr>
