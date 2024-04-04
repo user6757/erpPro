@@ -16,7 +16,6 @@ public class AdminLoginServiceImpl implements AdminLoginService{
 	}
 	
 	public AdminLoginVO adminsignIn(String adminId) {
-		System.out.println("»Æ¿Œ");
 		return adminLoginDAO.adminsignIn(adminId);
 	}
 	

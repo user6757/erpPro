@@ -110,12 +110,13 @@
 	            },
                 success:function(result) {
                     console.log('flag:', result);
-                    if (result === 0) {
+                    if (result === 'N') {
                         alert('정보에 해당하는 유저가 존재하지않습니다.');
                     } else {
                         // 정상적으로 입력한 경우
                     	document.getElementById('idfind-div').style.display="none";
                     	document.getElementById('idfind-ok').style.display="block";
+                    	document.createTextNode(result);
                     }
                 },
                 error:function(xhres){

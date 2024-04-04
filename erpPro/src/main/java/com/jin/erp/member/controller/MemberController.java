@@ -50,16 +50,13 @@ public class MemberController {
     }
 	
 	@RequestMapping(value="/member/idsearch", method=RequestMethod.POST)
-	@ResponseBody
-    public ResponseEntity<String> idSearch(Member member, Model model) {
-		
+    public ResponseEntity<String> idSearch(Member member) {
 		try {
 			Member dBSearchmember = memberService.idsearch(member);
 			if(dBSearchmember != null) {
-				model.addAttribute("member", dBSearchmember);
-				return new ResponseEntity<>("success", HttpStatus.OK);
+				return ResponseEntity.ok(dBSearchmember.getAccount());
 			}else {
-				return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+				return ResponseEntity.ok("N");
 			}
 		}catch(Exception e){
 			e.printStackTrace();

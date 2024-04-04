@@ -34,12 +34,13 @@
             <li><a href="/mroom/mrlist">Room</a></li>	<!-- 회의실 -->
             <li><a href="#">Contact</a></li>
 
-            <c:if test="${userid == null}">
+            <c:if test="${userid == null && adminid == null}">
                 <li><a href="/member/memberpage">Sign Up</a></li>
                 <li><a href="/member/login">Sign In</a></li>
+                
             </c:if>
 
-            <c:if test="${userid != null}">
+            <c:if test="${userid != null || adminid != null}">
                 <li><a href="#">My Page</a></li>
                 <li><a href="/member/sign-out">Sign Out</a></li>
             </c:if>
