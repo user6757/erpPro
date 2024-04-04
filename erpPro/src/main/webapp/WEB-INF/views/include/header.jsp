@@ -13,6 +13,9 @@
             <c:if test="${userid != null}">
                 ${userid}님
             </c:if>
+            <c:if test="${adminid != null}">
+                ${adminid}
+            </c:if>
         </h2>
         <a href="#" class="menu-open">
             <span class="menu-txt">MENU</span>
