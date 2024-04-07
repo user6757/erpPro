@@ -3,20 +3,27 @@
 <mapper namespace="com.jin.erp.member.dao.MemberDAOImpl">
 
 	<select id="idcheck" resultType="int">
-		select count(*)
-		from erpmember
-		where account = #{account}
+		SELECT COUNT(*)
+		FROM ERPMEMBER
+		WHERE ACCOUNT = #{account}
 	</select>
 	
-	<insert id="singup">
+	<insert id="member_singup">
 		insert
-		 into erpmember(
-		 account,
+		  into erpmember(
+		  account,
 		  password,
-		   name,
-		    email,
-		     reg_date)
-		values(#{account}, #{password}, #{name}, #{email}, sysdate)
+		  name,
+		  email,
+		  reg_date
+		)
+		values(
+		  #{account},
+		  #{password},
+		  #{name},
+		  #{email},
+		  sysdate
+		)
 	</insert>
 	
 	<select id="idsearch" resultType="com.jin.erp.member.domain.Member">

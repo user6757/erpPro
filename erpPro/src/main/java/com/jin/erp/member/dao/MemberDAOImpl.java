@@ -16,9 +16,10 @@ public class MemberDAOImpl implements MemberDAO{
 	public int idcheck(String account) {
 		return sqlSession.selectOne("idcheck", account);
 	}
+	
 	@Override
 	public int singup(Member member) {
-		return sqlSession.insert("singup", member);
+		return sqlSession.insert("member_singup", member);
 	}
 	
 	@Override

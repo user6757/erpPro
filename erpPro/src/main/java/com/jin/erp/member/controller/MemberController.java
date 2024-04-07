@@ -1,5 +1,7 @@
 package com.jin.erp.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,16 @@ public class MemberController {
 		return "member/membership";
 	}
 	
-	@PostMapping(value="/member/idcheck")
+	@PostMapping(value="/member/idcheck", produces="application/json")
 	@ResponseBody
-	public boolean idcheck(String account) {
-		return memberService.idcheck(account)== 1? true : false;
+	public Integer idcheck(String account) {
+		return memberService.idcheck(account);
 	}
 	
 	@PostMapping("/member/signup")
-    public String signUp(Member member, RedirectAttributes ra) throws Exception{
+    public String signUp(Member member, HttpServletRequest request, RedirectAttributes ra) throws Exception{
         boolean flag = memberService.singup(member);
-        ra.addFlashAttribute("msg", "reg-success");
+//        ra.addFlashAttribute("msg", "reg-success");
         return flag ? "redirect:/member/login" : "redirect:/member/membership";
     }
 	
@@ -49,17 +51,14 @@ public class MemberController {
         return "member/idfind";
     }
 	
-	@RequestMapping(value="/member/idsearch", method=RequestMethod.POST)
-	@ResponseBody
-    public ResponseEntity<String> idSearch(Member member, Model model) {
-		
+	@RequestMapping(value="/member/idsearch", method=RequestMethod.POST, produces="application/json")
+    public ResponseEntity<Object> idSearch(Member member, Model model) {
 		try {
 			Member dBSearchmember = memberService.idsearch(member);
 			if(dBSearchmember != null) {
-				model.addAttribute("member", dBSearchmember);
-				return new ResponseEntity<>("success", HttpStatus.OK);
+				return new ResponseEntity<>(dBSearchmember, HttpStatus.OK);
 			}else {
-				return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("N", HttpStatus.OK);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

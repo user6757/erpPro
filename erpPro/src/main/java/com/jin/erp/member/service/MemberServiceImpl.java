@@ -17,7 +17,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int idcheck(String account) {
-		return memberDAO.idcheck(account);
+		int result = memberDAO.idcheck(account);
+		System.out.println("°ª:"+ result);
+		return result;
 	}
 	
 	@Override
