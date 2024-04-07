@@ -48,8 +48,8 @@
                             </tr>                                                                                 
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;">
-                                <button value="아이디찾기" class="btn form-control tooltipstered" id="idfind-btn"
-                                    style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8"></button>
+                                <button class="btn form-control tooltipstered" type="button" id="idfind-btn"
+                                    style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">아이디찾기</button>
                                 </td>
                             </tr>
                              <tr>
@@ -68,25 +68,18 @@
                         </table>
                     </form>
                     </div>
-                    
                 </div>
-                <div class="idfind-ok" id="idfind-ok">
-                	<div class="text-center">
-                       <h2>${member.name}님</h2><br>
-                            아이디:${member.account}<br>
-                     </div>
-                </div>
+                <div style="width:300px; text-align: center;" class="idfind-ok" id="idfind-ok">
+                	<div class="userdata" id="userdata"></div>
+                </div>     	
             </div>
         </div>
     </div>
     <%@ include file="../include/footer.jsp" %>
 </body>
-
 <script type="text/javascript">
-
 	$(document).ready(function () {
 		document.getElementById('idfind-ok').style.display="none";
-		
 		$('#idfind-btn').on('click', e => {
 			const $searchform = $('#searchform');
 			const $name = $('#name');
@@ -100,10 +93,11 @@
 				alert('이메일을 입력하세요.');
 				return;
 			}
-			
 			$.ajax({
                 type : 'post',
 	            url : '/member/idsearch',
+	            async: true,
+	            dataType: 'JSON',
 	            data : {
 	            	name: $name.val(),
                     email:$email.val()
@@ -112,21 +106,19 @@
                     console.log('flag:', result);
                     if (result === 'N') {
                         alert('정보에 해당하는 유저가 존재하지않습니다.');
+                        return;
                     } else {
                         // 정상적으로 입력한 경우
                     	document.getElementById('idfind-div').style.display="none";
                     	document.getElementById('idfind-ok').style.display="block";
-                    	document.createTextNode(result);
+                    	document.getElementById('userdata').append(result.name+'님의 아이디는 '+ result.account+'입니다.');                   	
                     }
                 },
                 error:function(xhres){
 					console.log(xhres);
 				},
             });
-			
 		});
-			
-	})
-		
+	})	
 </script>
 </html>

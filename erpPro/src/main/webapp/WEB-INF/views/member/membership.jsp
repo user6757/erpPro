@@ -110,7 +110,6 @@
                                             style="background: gray; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">
                                     </td>
                                 </tr>
-
                             </table>
                         </form>
                     </div>
@@ -127,16 +126,12 @@
                 /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
             const getName = RegExp(/^[가-힣]+$/);
             const getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-
             // 입력값 검증 배열
             // 1: 아이디,  2: 비번, 3: 비번확인, 4: 이름, 5: 이메일
             const checkArr = [false, false, false, false, false];
-            
             const $signbtn = $('signup-btn');
-
             // 1. 아이디 검증
             const $idInput = $('#user_id');
-
             $idInput.on('keyup', e => {
                 // 아이디를 입력하지 않은 경우
                 if ($idInput.val().trim() === '') {
@@ -156,23 +151,26 @@
                 else {
                     console.log('확');
                     $.ajax({
+                    	url : '/member/idcheck',
                         type : 'post',
-			            url : '/member/idcheck',
+			            async: true,
 			            data : {
                             account: $idInput.val(),
 			            },
-                        success:function(result) {
-                            console.log('flag:', result);
-                            if (result === true) {
-                                $idInput.css('border-color', 'red');
-                                $('#idChk').html('<b class="c-red">[중복된 아이디입니다.]</b>');
-                                checkArr[0] = false;
-                            } else {
+                        success:function(data) {
+                            	console.log(data);
+                            	if(data === 1){
+                            		$idInput.css('border-color', 'red');
+                                    $('#idChk').html('<b class="c-red">[중복된 아이디입니다.]</b>');
+                                    checkArr[0] = false;
+                            	}
+                            	else{
+                            		console.log('실행2');
                                 // 정상적으로 입력한 경우
-                                $idInput.css('border-color', 'skyblue');
-                                $('#idChk').html('<b class="c-blue">[사용가능한 아이디입니다.]</b>');
-                                checkArr[0] = true;
-                            }
+                                	$idInput.css('border-color', 'skyblue');
+                                	$('#idChk').html('<b class="c-blue">[사용가능한 아이디입니다.]</b>');
+                                	checkArr[0] = true;
+                            	} 
                         },
                         error:function(xhres){
 							console.log(xhres);
@@ -199,9 +197,7 @@
                     $('#pwChk').html('<b class="c-blue">[사용가능한 패스워드 입니다.]</b>');
                     checkArr[1] = true;
                 }
-
             });
-
             //패스워드 확인란 입력값 검증.
             $('#password_check').on('keyup', function () {
                 //비밀번호 확인란 공백 확인
@@ -220,9 +216,7 @@
                     $('#pwChk2').html('<b class="c-blue">[참 잘했어요]</b>');
                     checkArr[2] = true;
                 }
-
             });
-
             //이름 입력값 검증.
             $('#user_name').on('keyup', function () {
                 //이름값 공백 확인
@@ -241,9 +235,7 @@
                     $('#nameChk').html('<b class="c-blue">[성공!]</b>');
                     checkArr[3] = true;
                 }
-
             });
-
             //이메일 입력값 검증.
             const $emailInput = $('#user_email');
             $emailInput.on('keyup', function () {
@@ -279,27 +271,18 @@
                             }
                         });
                 }
-
             });
-
             // 회원가입 양식 서버로 전송하는 클릭 이벤트
             const $regForm = $('#signUpForm');
-
             $('#signup-btn').on('click', e => {
-
                 if (!checkArr.includes(false)) {
                     $regForm.submit();
                 } else {
                     alert('입력란을 다시 확인하세요!');
                 }
             });
-
         }); // end jQuery
     </script>
-
-
     <%@ include file="../include/footer.jsp" %>
-
 </body>
-
 </html>

@@ -49,7 +49,7 @@
                                     placeholder="최소 8자"></td>
                             </tr>                            
                             <!-- 자동 로그인 체크박스 -->
-                            <tr>
+                            <!-- <tr>
                                 <td>
                                     <label for="auto-login">
                                         <span>
@@ -59,7 +59,7 @@
                                         </span>
                                     </label>
                                 </td>
-                            </tr>
+                            </tr> -->
                             
                             <tr>
                                 <td style="padding-top: 10px; text-align: center">
@@ -74,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
-                                    <a class="btn form-control tooltipstered" href="/member/sign-up"
+                                    <a class="btn form-control tooltipstered" href="/member/memberpage"
                                     style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: gray; border: 0px solid #388E3C; opacity: 0.8">
                                         회원가입</a>
                                 </td>
@@ -111,7 +111,6 @@
             alert('로그인 후 사용할 수 있습니다.');
         }
     </script>
-
     <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

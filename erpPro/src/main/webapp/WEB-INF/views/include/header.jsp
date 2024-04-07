@@ -10,12 +10,10 @@
             </a>
         </h1>
         <h2 class="intro-text">어서오세요.
-            <c:if test="${userid != null}">
-                ${userid}님
-            </c:if>
-            <c:if test="${adminid != null}">
-                ${adminid}
-            </c:if>
+            <c:choose>
+            	<c:when test="${userid != null}">${userid}님</c:when>
+            	<c:when test="${adminid != null}">${adminid}님</c:when>
+            </c:choose>
         </h2>
         <a href="#" class="menu-open">
             <span class="menu-txt">MENU</span>
@@ -37,16 +35,13 @@
             <c:if test="${userid == null && adminid == null}">
                 <li><a href="/member/memberpage">Sign Up</a></li>
                 <li><a href="/member/login">Sign In</a></li>
-                
             </c:if>
-
+            
             <c:if test="${userid != null || adminid != null}">
                 <li><a href="#">My Page</a></li>
                 <li><a href="/member/sign-out">Sign Out</a></li>
             </c:if>
-
         </ul>
     </nav>
-
 </header>
 <!-- //header -->

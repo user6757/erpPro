@@ -26,9 +26,8 @@ public class AdminMemberController {
 		this.adminLoginService = adminLoginService;
 	}
 	
-	@RequestMapping(value="/admin/login")
-	public String adminLoginPage() {
-		return "admin/admin_login";
+	@RequestMapping(value="/admin/admin_login")
+	public void adminLoginPage() {
 	}
 	
 //	@RequestMapping(value="/admin/login")
@@ -57,10 +56,6 @@ public class AdminMemberController {
 			}
 		}
 	}
-	
-	
-	
-	
 	
 
 }
