@@ -32,6 +32,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/membership")
 	public void memberShip(String msg, Model model) {
+		
 		if(msg != null) {
 			model.addAttribute("message", msg);
 		}

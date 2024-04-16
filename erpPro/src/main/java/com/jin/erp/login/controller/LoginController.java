@@ -24,7 +24,7 @@ public class LoginController {
 	
     @GetMapping(value="/member/login")
     public void login(@ModelAttribute("message") String message, HttpServletRequest request) {
-    	System.out.println("ㅈㅈㅈ"+ message);
+    	System.out.println("메세지"+ message);
     	String referer = request.getHeader("Referer");
     	request.getSession().setAttribute("redirectURI", referer);
     }
