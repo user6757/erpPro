@@ -1,5 +1,7 @@
 package com.jin.erp.member.dao;
 
+import java.sql.SQLException;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public int singup(Member member) {
+	public int singup(Member member) throws SQLException{
 		return sqlSession.insert("member_singup", member);
 	}
 	

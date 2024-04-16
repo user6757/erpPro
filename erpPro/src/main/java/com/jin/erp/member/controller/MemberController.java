@@ -9,15 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.jin.erp.HomeController;
 import com.jin.erp.member.domain.Member;
 import com.jin.erp.member.service.MemberService;
@@ -27,15 +23,15 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/member/membership")
-	public void memberShip(String msg, Model model) {
-		
-		if(msg != null) {
-			model.addAttribute("message", msg);
-		}
+	@Autowired 
+	public MemberController(MemberService memberService) {
+		this.memberService = memberService;
+	}
+	
+	@RequestMapping(value="/member/membership", method= {RequestMethod.POST, RequestMethod.GET})
+	public void memberShip() {
 	}
 	
 	@PostMapping(value="/member/idcheck")
@@ -45,17 +41,22 @@ public class MemberController {
 	}
 	
 	@PostMapping(value="/member/signup")
-	@ExceptionHandler(Exception.class)
-    public String signUp(Member member, HttpServletRequest request, RedirectAttributes redirect, Model model, Exception e) throws Exception{
-		
-        boolean flag = memberService.singup(member);
-        if(flag) {
-        	redirect.addAttribute("msg", "reg-success");
-        	return "redirect:/member/login";
-        }else {
-        	redirect.addAttribute("msg", "reg-error");
-        	return "redirect:/member/membership";
-        }
+    public String signUp(Member member, HttpServletRequest request,
+    		RedirectAttributes redirect, Model model, Exception e) throws Exception{
+		try {
+			boolean flag = memberService.singup(member);
+	        if(flag) {
+	        	redirect.addFlashAttribute("msge", "reg-success");
+	        	return "redirect:/member/login";
+	        }else {
+	        	redirect.addFlashAttribute("msge", "reg-success");
+	        	return "member/membership";
+	        }
+		}catch(Exception exception) {
+			exception.printStackTrace();
+			redirect.addFlashAttribute("msg", "reg-error");
+			return "redirect:/member/membership";
+		}
         
     }
 	

@@ -10,8 +10,12 @@ import com.jin.erp.member.domain.Member;
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	public MemberServiceImpl(MemberDAO memberDAO) {
+		this.memberDAO = memberDAO;
+	}
 	
 	@Override
 	public int idcheck(String account) {

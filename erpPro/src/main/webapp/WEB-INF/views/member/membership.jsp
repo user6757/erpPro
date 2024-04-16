@@ -16,10 +16,11 @@
         }
     </style>
     <script type="text/javascript">
-    	var message ='${message}';
-    	if(message === 'reg-error'){
-    		alert('이미 존재하는 회원입니다. 다시 확인해주세요');
+    	var mag = '${msg}';
+    	if(mag ==='reg-error'){
+    		alert('이미 존재하는 아이디입니다');
     	}
+    
     </script>
 </head>
 <body>
