@@ -15,6 +15,13 @@
             color: rgb(25, 236, 120);
         }
     </style>
+    <script type="text/javascript">
+    	var mag = '${msg}';
+    	if(mag ==='reg-error'){
+    		alert('이미 존재하는 아이디입니다');
+    	}
+    
+    </script>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>
@@ -28,7 +35,6 @@
                     <div class="card-body">
                         <form action="/member/signup" name="signup" id="signUpForm" method="post"
                             style="margin-bottom: 0;">
-
                             <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                                 <tr>
                                     <td style="text-align: left">
@@ -50,11 +56,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><input type="password" size="17" maxlength="20" id="password" name="password"
-                                            class="form-control tooltipstered" maxlength="20" required="required"
+                                    <td><input type="password" size="17" maxlength="25" id="password" name="password"
+                                            class="form-control tooltipstered" required="required"
                                             aria-required="true"
                                             style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
-                                            placeholder="영문과 특수문자를 포함한 최소 8자"></td>
+                                            placeholder="영문과 특수문자를 포함한 최소 8자 이상 25자이내"></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left">
@@ -149,23 +155,21 @@
                 }
                 // 아이디 중복 확인 검증
                 else {
-                    console.log('확');
                     $.ajax({
                     	url : '/member/idcheck',
                         type : 'post',
 			            async: true,
+			            dataType : "TEXT",
 			            data : {
                             account: $idInput.val(),
 			            },
-                        success:function(data) {
-                            	console.log(data);
-                            	if(data === 1){
+                        success:function(result) {
+                            	if(result === "1"){
                             		$idInput.css('border-color', 'red');
                                     $('#idChk').html('<b class="c-red">[중복된 아이디입니다.]</b>');
                                     checkArr[0] = false;
                             	}
                             	else{
-                            		console.log('실행2');
                                 // 정상적으로 입력한 경우
                                 	$idInput.css('border-color', 'skyblue');
                                 	$('#idChk').html('<b class="c-blue">[사용가능한 아이디입니다.]</b>');

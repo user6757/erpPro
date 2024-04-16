@@ -31,10 +31,10 @@
                             </tr>
                             <tr>
                                 <td><input type="text" name="account" id="signInId"
-                                    class="form-control tooltipstered" maxlength="10"
+                                    class="form-control tooltipstered" maxlength="14"
                                     required="required" aria-required="true"
                                     style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                                    placeholder="최대 10자"></td>
+                                    placeholder="최대 14자"></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left">
@@ -43,10 +43,8 @@
                             </tr>
                             <tr>
                                 <td><input type="password" size="17" maxlength="20" id="signInPw"
-                                    name="password" class="form-control tooltipstered" 
-                                    maxlength="20" required="required" aria-required="true"
-                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
-                                    placeholder="최소 8자"></td>
+                                    name="password" class="form-control tooltipstered" required="required" aria-required="true"
+                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"></td>
                             </tr>                            
                             <!-- 자동 로그인 체크박스 -->
                             <!-- <tr>
@@ -74,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
-                                    <a class="btn form-control tooltipstered" href="/member/memberpage"
+                                    <a class="btn form-control tooltipstered" href="/member/membership"
                                     style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: gray; border: 0px solid #388E3C; opacity: 0.8">
                                         회원가입</a>
                                 </td>
@@ -95,7 +93,7 @@
         </div>
     </div>
     <script>
-        const msg = '${msg}';
+        const msg = '${msge}';
         if (msg === 'reg-success') {
             alert('축하합니다. 회원가입에 성공했습니다.');
         }
@@ -106,7 +104,6 @@
             alert('비밀번호가 틀렸습니다.');
         }
         const warning = '${message}';
-        console.log('message:', warning);
         if (warning === 'no-login') {
             alert('로그인 후 사용할 수 있습니다.');
         }

@@ -25,6 +25,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		freevo.setLimit(freevo.getStart()+freevo.getLimit()-1);
 		
 		if(freevo.getType() != null && freevo.getKeyword() != null) {
+			
 			List<FreeBoardVO> searchlist = freeDAO.search(freevo);
 			
 			for(FreeBoardVO freeBoardVO : searchlist) {

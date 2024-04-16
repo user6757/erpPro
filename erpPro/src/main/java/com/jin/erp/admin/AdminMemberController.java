@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jin.erp.HomeController;
@@ -30,15 +31,9 @@ public class AdminMemberController {
 	public void adminLoginPage() {
 	}
 	
-//	@RequestMapping(value="/admin/login")
-//	public String adminLogin(AdminLoginVO adminLoginVO) {
-//		
-//		return "admin/admin_login";
-//	}
-	
 	@RequestMapping(value="/admin/singnIn", method=RequestMethod.POST)
 	@ResponseBody
-	public String adminsignIn(String adminId, String adminPw, HttpSession session) {
+	public String adminsignIn(@RequestParam("adminId") String adminId, @RequestParam("adminPw") String adminPw, HttpSession session) {
 		AdminLoginVO adminLoginVO = adminLoginService.adminsignIn(adminId);
 		if(adminLoginVO == null) {
 			return "N";

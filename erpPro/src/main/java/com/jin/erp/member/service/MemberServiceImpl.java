@@ -1,8 +1,6 @@
 package com.jin.erp.member.service;
 
 import java.security.MessageDigest;
-
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +10,25 @@ import com.jin.erp.member.domain.Member;
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	public MemberServiceImpl(MemberDAO memberDAO) {
+		this.memberDAO = memberDAO;
+	}
 	
 	@Override
 	public int idcheck(String account) {
-		int result = memberDAO.idcheck(account);
-		System.out.println("°ª:"+ result);
-		return result;
+		return memberDAO.idcheck(account);
+		
 	}
 	
 	@Override
 	public boolean singup(Member member) throws Exception{
+		int account = member.getAccount().length();
+		if(account < 4 && account < 16) {
+			return false;
+		}
 		MessageDigest pw = MessageDigest.getInstance("SHA-512");
         pw.update(member.getPassword().getBytes("UTF-8"));
         byte[] getpassword = pw.digest();

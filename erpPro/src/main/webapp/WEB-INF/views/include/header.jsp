@@ -33,7 +33,7 @@
             <li><a href="#">Contact</a></li>
 
             <c:if test="${userid == null && adminid == null}">
-                <li><a href="/member/memberpage">Sign Up</a></li>
+                <li><a href="/member/membership">Sign Up</a></li>
                 <li><a href="/member/login">Sign In</a></li>
             </c:if>
             

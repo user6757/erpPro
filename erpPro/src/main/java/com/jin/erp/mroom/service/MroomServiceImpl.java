@@ -15,6 +15,7 @@ public class MroomServiceImpl implements MroomService{
 	private MroomDAO mroomDAO;
 	
 	public int mroomSave(MroomVO mroomVO) {
+		
 		return mroomDAO.mrsave(mroomVO);
 	}
 	

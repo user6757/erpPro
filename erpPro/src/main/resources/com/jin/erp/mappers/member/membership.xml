@@ -9,15 +9,15 @@
 	</select>
 	
 	<insert id="member_singup">
-		insert
-		  into erpmember(
+		INSERT
+		  INTO ERPMEMBER(
 		  account,
 		  password,
 		  name,
 		  email,
 		  reg_date
 		)
-		values(
+		VALUES(
 		  #{account},
 		  #{password},
 		  #{name},

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.jin.erp.HomeController;
 import com.jin.erp.member.domain.Member;
 import com.jin.erp.member.service.MemberService;
@@ -25,30 +23,45 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/member/memberpage")
-	public String memberpage() {
-		return "member/membership";
+	@Autowired 
+	public MemberController(MemberService memberService) {
+		this.memberService = memberService;
 	}
 	
-	@PostMapping(value="/member/idcheck", produces="application/json")
+	@RequestMapping(value="/member/membership", method= {RequestMethod.POST, RequestMethod.GET})
+	public void memberShip() {
+	}
+	
+	@PostMapping(value="/member/idcheck")
 	@ResponseBody
-	public Integer idcheck(String account) {
-		return memberService.idcheck(account);
+	public String idcheck(String account) {
+		return Integer.toString(memberService.idcheck(account));
 	}
 	
-	@PostMapping("/member/signup")
-    public String signUp(Member member, HttpServletRequest request, RedirectAttributes ra) throws Exception{
-        boolean flag = memberService.singup(member);
-//        ra.addFlashAttribute("msg", "reg-success");
-        return flag ? "redirect:/member/login" : "redirect:/member/membership";
+	@PostMapping(value="/member/signup")
+    public String signUp(Member member, HttpServletRequest request,
+    		RedirectAttributes redirect, Model model, Exception e) throws Exception{
+		try {
+			boolean flag = memberService.singup(member);
+	        if(flag) {
+	        	redirect.addFlashAttribute("msge", "reg-success");
+	        	return "redirect:/member/login";
+	        }else {
+	        	redirect.addFlashAttribute("msge", "reg-success");
+	        	return "member/membership";
+	        }
+		}catch(Exception exception) {
+			exception.printStackTrace();
+			redirect.addFlashAttribute("msg", "reg-error");
+			return "redirect:/member/membership";
+		}
+        
     }
 	
 	@RequestMapping("/member/idfind")
-    public String idFindPage(){
-        return "member/idfind";
+    public void idFindPage(){
     }
 	
 	@RequestMapping(value="/member/idsearch", method=RequestMethod.POST, produces="application/json")
@@ -64,7 +77,6 @@ public class MemberController {
 			e.printStackTrace();
 			return new ResponseEntity<>("erorr", HttpStatus.BAD_REQUEST);
 		}
-		
     }
 	
 
