@@ -29,7 +29,7 @@
                             </tr>
                             <tr>
                                 <td><input type="text" name="name" id="name"
-                                    class="form-control tooltipstered" maxlength="10"
+                                    class="form-control tooltipstered" maxlength="7"
                                     required="required" aria-required="true"
                                     style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                     placeholder="최대 7자"></td>
@@ -79,6 +79,7 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function () {
+		let $userdata = document.getElementById('userdata');
 		document.getElementById('idfind-ok').style.display="none";
 		$('#idfind-btn').on('click', e => {
 			const $searchform = $('#searchform');
@@ -103,7 +104,6 @@
                     email:$email.val()
 	            },
                 success:function(result) {
-                    console.log('flag:', result);
                     if (result === 'N') {
                         alert('정보에 해당하는 유저가 존재하지않습니다.');
                         return;
@@ -111,7 +111,7 @@
                         // 정상적으로 입력한 경우
                     	document.getElementById('idfind-div').style.display="none";
                     	document.getElementById('idfind-ok').style.display="block";
-                    	document.getElementById('userdata').append(result.name+'님의 아이디는 '+ result.account+'입니다.');                   	
+                    	$userdata.append(result.name+'님의 아이디는 '+ result.account+'입니다.');                   	
                     }
                 },
                 error:function(xhres){

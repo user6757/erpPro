@@ -55,6 +55,8 @@ CREATE TABLE erpFileUpload (
 
 delete from freeboard;
 
+delete from erpmember;
+
 delete from erpFileUpload;
 
 ALTER TABLE freeboard DROP CONSTRAINT seq;
@@ -87,6 +89,8 @@ select * from freeboard;
 select * from qnaboard;
 select * from erpFileUpload;
 select * from erpadmin;
+select * from erpmember;
+
 
 ALTER TABLE freeboard DROP COLUMN filedate;
 ALTER TABLE freeboard DROP COLUMN files;

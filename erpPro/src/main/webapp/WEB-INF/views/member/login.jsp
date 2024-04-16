@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <td><input type="text" name="account" id="signInId"
-                                    class="form-control tooltipstered" maxlength="10"
+                                    class="form-control tooltipstered" maxlength="14"
                                     required="required" aria-required="true"
                                     style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                     placeholder="최대 10자"></td>
@@ -74,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
-                                    <a class="btn form-control tooltipstered" href="/member/memberpage"
+                                    <a class="btn form-control tooltipstered" href="/member/membership"
                                     style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: gray; border: 0px solid #388E3C; opacity: 0.8">
                                         회원가입</a>
                                 </td>
@@ -96,6 +96,7 @@
     </div>
     <script>
         const msg = '${msg}';
+        console.log('값:', msg);
         if (msg === 'reg-success') {
             alert('축하합니다. 회원가입에 성공했습니다.');
         }
