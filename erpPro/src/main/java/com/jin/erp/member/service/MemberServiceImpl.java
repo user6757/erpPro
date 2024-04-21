@@ -25,6 +25,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public boolean singup(Member member) throws Exception{
+		if(member == null) {
+			System.out.println("없음");
+			return false;
+		}
 		int account = member.getAccount().length();
 		if(account < 4 && account < 16) {
 			return false;

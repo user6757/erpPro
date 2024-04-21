@@ -107,6 +107,12 @@
   		 
   </select>
   
+  <update id="freeDetail_cntup">
+  	update freeboard
+      set cnt=cnt+1
+    where seq = #{seq}  
+  </update>
+  
   <select id="fileEq" resultType="int">
   	SELECT COUNT(*)
 	  FROM erpFileUpload

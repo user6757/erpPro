@@ -9,6 +9,7 @@
         }
     </style>
     <%@ include file="../include/static-head.jsp" %>
+    <title>로그인</title>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>

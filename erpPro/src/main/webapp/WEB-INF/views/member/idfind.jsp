@@ -9,6 +9,7 @@
             margin: 200px auto;
         }
     </style>
+    <title>아이디찾기</title>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>

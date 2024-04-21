@@ -44,17 +44,17 @@ public class MemberController {
     public String signUp(Member member, HttpServletRequest request,
     		RedirectAttributes redirect, Model model, Exception e) throws Exception{
 		try {
-			boolean flag = memberService.singup(member);
-	        if(flag) {
+			boolean signUpResult = memberService.singup(member);
+	        if(signUpResult) {
 	        	redirect.addFlashAttribute("msge", "reg-success");
 	        	return "redirect:/member/login";
 	        }else {
-	        	redirect.addFlashAttribute("msge", "reg-success");
+	        	redirect.addFlashAttribute("msge", "reg-error");
 	        	return "member/membership";
 	        }
 		}catch(Exception exception) {
 			exception.printStackTrace();
-			redirect.addFlashAttribute("msg", "reg-error");
+			redirect.addFlashAttribute("msge", "reg-error");
 			return "redirect:/member/membership";
 		}
         

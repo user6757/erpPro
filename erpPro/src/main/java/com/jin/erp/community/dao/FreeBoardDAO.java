@@ -26,5 +26,7 @@ public interface FreeBoardDAO {
 	public FileVO filesearch(int seq)throws NullPointerException;
 	
 	public int fileEq(int seq);
+	
+	public int freecntUp(FreeBoardVO freeBoardVO);
 
 }
