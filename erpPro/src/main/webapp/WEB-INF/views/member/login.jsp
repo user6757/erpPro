@@ -7,6 +7,10 @@
         .wrap {
             margin: 200px auto;
         }
+        
+        #card-box{
+        	
+        }
     </style>
     <%@ include file="../include/static-head.jsp" %>
     <title>로그인</title>
@@ -45,7 +49,7 @@
                             <tr>
                                 <td><input type="password" size="17" maxlength="20" id="signInPw"
                                     name="password" class="form-control tooltipstered" required="required" aria-required="true"
-                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"></td>
+                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de" placeholder="최대 25자"></td>
                             </tr>                            
                             <!-- 자동 로그인 체크박스 -->
                             <!-- <tr>
@@ -66,8 +70,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 100%; text-align: center; colspan: 2;"><input
-                                    type="submit" value="로그인" class="btn form-control tooltipstered" id="signIn-btn"
+                                <td style="width: 100%; text-align: center; colspan: 2;">
+                                <input type="submit" value="로그인" class="btn form-control tooltipstered" id="signIn-btn"
                                     style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
                                 </td>
                             </tr>
@@ -78,17 +82,16 @@
                                         회원가입</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 100%; text-align: center; colspan: 2; margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
-                                    <a class="btn form-control tooltipstered" href="/member/idfind"
-                                    style="cursor: pointer; margin-top: 0; height: 40px; color: white; background-color: gray; border: 0px solid #388E3C; opacity: 0.8">
-                                        아이디찾기</a>
-                                </td>
-                            </tr>
-                           
                         </table>
                     </form>
+                    	<div style="margin-top:5px; display: inline-block;">
+                    		<a href="/member/idfind">아이디 찾기</a>
+                    	</div>
+                    	<div style="margin-top:5px; margin-left:300px; display: inline-block;">
+                    		<a href="/member/passwordfind">비밀번호 찾기</a>
+                    	</div>
                     </div>
+                    
                 </div>
             </div>
         </div>
