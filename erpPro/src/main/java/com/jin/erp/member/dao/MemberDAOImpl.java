@@ -28,4 +28,14 @@ public class MemberDAOImpl implements MemberDAO{
 	public Member idsearch(Member member) {
 		return sqlSession.selectOne("idsearch", member);
 	}
+	
+	@Override
+	public int passwordfind(Member member) {
+		return sqlSession.selectOne("password_find", member);
+	}
+	
+	@Override
+	public int setpassword(int password) {
+		return sqlSession.update("passowrd_set", password);
+	}
 }

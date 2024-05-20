@@ -143,4 +143,5 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public String freedelete(int seq) {
 		return freeBoardService.deleteBoard(seq) ==1 ? "redirect:/free/list" : "community/freeBoard/freeBoardedit";
 	}
+	
 }

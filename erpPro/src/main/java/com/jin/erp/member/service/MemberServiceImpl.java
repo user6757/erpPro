@@ -1,6 +1,10 @@
 package com.jin.erp.member.service;
 
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public boolean singup(Member member) throws Exception{
+		if(member == null) {
+			System.out.println("없음");
+			return false;
+		}
 		int account = member.getAccount().length();
 		if(account < 4 && account < 16) {
 			return false;
@@ -44,5 +52,27 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member idsearch(Member member) {
 		return memberDAO.idsearch(member);
+	}
+	
+	@Override
+	public Map<String, Object> passwordfind(String account, String email) {
+		Map<String, Object> userpassword = new HashMap<>();
+		
+		Member memberVO = new Member();
+		memberVO.setAccount(account);
+		memberVO.setEmail(email);
+		int result = memberDAO.passwordfind(memberVO);
+		if(result ==1) {
+			
+			Random random = new Random();
+			int password = random.nextInt(1000000);
+			memberDAO.setpassword(password);
+			String newpassword = Integer.toString(password);
+			userpassword.put("message", newpassword);
+			return userpassword;
+		}else {
+			userpassword.put("message", "REG-NO");
+			return userpassword;
+		}
 	}
 }

@@ -32,4 +32,16 @@
 		WHERE NAME=#{name} AND EMAIL = #{email}
 	</select>
 	
+	<select id="password_find" resultType="int">
+		SELECT COUNT(*)
+		  FROM ERPMEMBER
+		WHERE ACCOUNT = #{account} and email = #{email} 
+	</select>
+	
+	<update id="passowrd_set">
+		update
+		  erpmember
+		set password = #{password}  
+	</update>
+	
 </mapper>

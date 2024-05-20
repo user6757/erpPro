@@ -59,7 +59,8 @@
   	    #{writer, jdbcType=VARCHAR},
   	    #{content, jdbcType=VARCHAR},
   	    sysdate,
-  	    #{cnt})
+  	    #{cnt}
+  	  )
   </insert>
   
   <update id="freeedit">
@@ -101,11 +102,20 @@
   
   <select id="filesearch" resultType="filevo">
   		select 
-  		  fileName, regDate, bNo
+  		  fileName,
+  		  regDate,
+  		  bNo
   		from erpFileUpload
   		where bNo = #{seq}
   		 
   </select>
+  
+  <update id="freeDetail_cntup">
+  	UPDATE 
+  	  FREEBOARD
+    SET CNT=CNT+1
+    WHERE SEQ = #{seq}  
+  </update>
   
   <select id="fileEq" resultType="int">
   	SELECT COUNT(*)

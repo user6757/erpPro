@@ -9,6 +9,7 @@
             margin: 200px auto;
         }
     </style>
+    <title>아이디찾기</title>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>
@@ -54,7 +55,7 @@
                             </tr>
                              <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;  margin-top: 24px; padding-top: 12px; border-top: 1px solid #ececec">
-                                <a class="btn form-control tooltipstered" href="/member/idfind" style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
+                                <a class="btn form-control tooltipstered" href="/member/passwordfind" style="background-color: #343A40; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">
                                         비밀번호찾기</a>
                                 </td>
                             </tr>
@@ -79,13 +80,15 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function () {
+		
 		let $userdata = document.getElementById('userdata');
+		const $name = $('#name');
+		const $email = $('#email');
 		document.getElementById('idfind-ok').style.display="none";
+		
 		$('#idfind-btn').on('click', e => {
-			const $searchform = $('#searchform');
-			const $name = $('#name');
 			
-			const $email = $('#email');
+			const $searchform = $('#searchform');
 			if($name.val() === null || $name.val() ===''){
 				alert('이름을 입력하세요.');	
 				return;
@@ -94,28 +97,30 @@
 				alert('이메일을 입력하세요.');
 				return;
 			}
+			
 			$.ajax({
                 type : 'post',
 	            url : '/member/idsearch',
 	            async: true,
-	            dataType: 'JSON',
+	            dataType : "TEXT",
 	            data : {
 	            	name: $name.val(),
                     email:$email.val()
 	            },
                 success:function(result) {
-                    if (result === 'N') {
+                	/* JSON.stringify(result); */
+                	if (result === null || result ==='' || result ==='N') {
                         alert('정보에 해당하는 유저가 존재하지않습니다.');
                         return;
                     } else {
-                        // 정상적으로 입력한 경우
                     	document.getElementById('idfind-div').style.display="none";
                     	document.getElementById('idfind-ok').style.display="block";
-                    	$userdata.append(result.name+'님의 아이디는 '+ result.account+'입니다.');                   	
+                    	$userdata.append($name.val()+'님의 아이디는 '+ result+'입니다.');
+                    	return;
                     }
                 },
-                error:function(xhres){
-					console.log(xhres);
+                error:function(xhr, status, error){
+					console.log(xhr);
 				},
             });
 		});

@@ -19,6 +19,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Autowired
 	private FreeBoardDAO freeDAO;
 	
+	@Override
 	public List<FreeBoardVO> listBoard(FreeBoardVO freevo, Page page) {
 		
 		freevo.setStart((page.getPage()-1)*freevo.getLimit()+1);
@@ -41,12 +42,14 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		}
 	}
 	
+	
 	private String strdate(FreeBoardVO freeBoardVO) {
 		SimpleDateFormat setregdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = freeBoardVO.getRegdate();
 		return setregdate.format(date);
 	}
 	
+	@Override
 	public int insertBoard(FreeBoardVO freeVO, MultipartRequest multipart) {
 		freeVO.setCnt(0);
 		freeVO.setTitle(multipart.getParameter("title"));
@@ -55,29 +58,43 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeDAO.insertBoard(freeVO);
 	}
 	
+	@Override
 	public int editBoard(FreeBoardVO freeVO) {
 		return freeDAO.editBoard(freeVO);
 	}
 	
+	@Override
 	public FreeBoardVO detailboard(FreeBoardVO freeBoardVO) throws Exception{
-		FreeBoardVO dbfreeboardVO = freeDAO.detailboard(freeBoardVO);
-		int result = freeDAO.fileEq(dbfreeboardVO.getSeq());
-		if(result >0) {
-			FileVO fileVO = freeDAO.filesearch(dbfreeboardVO.getSeq());
-			dbfreeboardVO.setFilename(fileVO.getFileName());
+		if(freeBoardVO != null) {
+			freeDAO.freecntUp(freeBoardVO);
+			FreeBoardVO dbfreeboardVO = freeDAO.detailboard(freeBoardVO);
+			if(dbfreeboardVO != null) {
+				int result = freeDAO.fileEq(dbfreeboardVO.getSeq());
+				if(result >0) {
+					FileVO fileVO = freeDAO.filesearch(dbfreeboardVO.getSeq());
+					dbfreeboardVO.setFilename(fileVO.getFileName());
+				}
+				dbfreeboardVO.setStrRegdate(strdate(dbfreeboardVO));
+				return dbfreeboardVO;
+			}else {
+				return null;
+			}
+		}else {
+			return null;
 		}
-		dbfreeboardVO.setStrRegdate(strdate(dbfreeboardVO));
-		return dbfreeboardVO;
 	}
 	
+	@Override
 	public int deleteBoard(int seq) {
 		return freeDAO.deleteBoard(seq);
 	}
 	
+	@Override
 	public int freetotal() {
 		return freeDAO.freetotal();
 	}
 	
+	@Override
 	public FileVO fileSave(FileVO fileVO) {
 		if(freeDAO.fileSave(fileVO)==1) {
 			fileVO = freeDAO.filesearch(fileVO.getBno());
@@ -87,6 +104,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		}
 	}
 	
+	@Override
 	public FileVO filesearch(int seq)throws NullPointerException{
 		return freeDAO.filesearch(seq);
 	}

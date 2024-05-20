@@ -16,12 +16,12 @@
         }
     </style>
     <script type="text/javascript">
-    	var mag = '${msg}';
+    	var mag = '${msge}';
     	if(mag ==='reg-error'){
-    		alert('이미 존재하는 아이디입니다');
+    		alert('회원정보를 다시 입력해주세요.');
     	}
-    
     </script>
+    <title>회원가입</title>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>
