@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -70,8 +69,11 @@
                     </form>
                     </div>
                 </div>
+         
                 <div style="width:300px; text-align: center;" class="idfind-ok" id="idfind-ok">
-                	<div class="userdata" id="userdata"></div>
+                	<h2>
+                		<div class="userdata" id="userdata"></div>
+                	</h2>
                 </div>     	
             </div>
         </div>
@@ -99,31 +101,39 @@
 			}
 			
 			$.ajax({
-                type : 'post',
+	            type : 'post',
 	            url : '/member/idsearch',
 	            async: true,
 	            dataType : "TEXT",
 	            data : {
 	            	name: $name.val(),
-                    email:$email.val()
+	                email:$email.val()
 	            },
-                success:function(result) {
-                	/* JSON.stringify(result); */
-                	if (result === null || result ==='' || result ==='N') {
-                        alert('정보에 해당하는 유저가 존재하지않습니다.');
-                        return;
-                    } else {
-                    	document.getElementById('idfind-div').style.display="none";
-                    	document.getElementById('idfind-ok').style.display="block";
-                    	$userdata.append($name.val()+'님의 아이디는 '+ result+'입니다.');
-                    	return;
-                    }
-                },
-                error:function(xhr, status, error){
+	            success:(result)=> {
+	            	/* JSON.stringify(result); */
+	            	console.log('qwe', result.status);
+	            	/* if(result.status == 200){
+	            		console.log('확인');
+	            		var dom = result.responseXML;
+	            		var carVal=dom.getElementsByTagName("Integer");
+	            		return;
+	            	} */
+	            	
+	            	if (result === null || result ==='' || result ==='N') {
+	                    alert('정보에 해당하는 유저가 존재하지않습니다.');
+	                    return;
+	                } else {
+	                	document.getElementById('idfind-div').style.display="none";
+	                	document.getElementById('idfind-ok').style.display="block";
+	                	$userdata.append($name.val()+'님의 아이디는 '+ result+'입니다.');
+	                	return;
+	                }
+	            },
+	            error:function(xhr, status, error){
 					console.log(xhr);
 				},
-            });
+	        });
 		});
-	})	
+	})
 </script>
 </html>

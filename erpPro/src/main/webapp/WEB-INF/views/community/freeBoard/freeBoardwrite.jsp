@@ -68,9 +68,6 @@
             const $contentInput = document.getElementById('exampleFormControlTextarea1');
             let flag = false; // 입력 제대로하면 true로 변경
 
-            console.log('w: ', $writerInput.value);
-            console.log('t: ', $titleInput.value);
-
             if ($writerInput.value.trim() === '') {
                 alert('작성자는 필수값입니다.');
             } else if ($titleInput.value.trim() === '') {

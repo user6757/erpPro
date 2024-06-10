@@ -27,8 +27,8 @@ public class QnABoardDAOImpl implements QnABoardDAO{
 				
 	}
 	
-	public QnABoardVO detailboard(QnABoardVO qnaVO) {
-		return sqlSession.selectOne("qnaone", qnaVO);
+	public QnABoardVO detailboard(int qnaNo) {
+		return sqlSession.selectOne("qnaone", qnaNo);
 				
 	}
 	

@@ -2,14 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="QnABoardDAOImpl">
 
-<select id="qnalist" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
-  	select
-  	 * from qnaboard
-  </select>
+	<select id="qnalist" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
+  		SELECT
+  		  * FROM QNABOARD
+  		ORDER BY QNANO DESC
+ 	</select>
   <insert id="qnainsert">
   	 insert
-  	  into qnaboard(qnano, title, writer, content, qnaregdate, qnacnt)
-  	  values(freeboard_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{qnacnt})
+  	  into qnaboard(
+  	  	qnano,
+  	  	title,
+  	  	writer,
+  	  	content,
+  	  	qnaregdate,
+  	  	qnacnt
+  	  )
+  	  values(
+  	    freeboard_seq.nextval,
+  	    #{title}, #{writer},
+  	    #{content},
+  	    sysdate, 
+  	    #{qnacnt}
+  	  )
   </insert>
   
   <update id="qnaedit">
@@ -18,9 +32,9 @@
   </update>
   
   <select id="qnaone" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
-  	select
-  	 * from qnaboard
-  	 where qnano = #{qnano}
+  	SELECT
+  	 * FROM QNABOARD
+  	 WHERE QNANO = #{qnaNo}
   </select>
   
   <delete id="qnadelete">

@@ -12,7 +12,7 @@ public interface QnABoardDAO {
 	
 	public int editBoard(QnABoardVO qnaVO);
 	
-	public QnABoardVO detailboard(QnABoardVO qnaVO);
+	public QnABoardVO detailboard(int qnaNo);
 	
 	public int deleteBoard(int seq);
 
