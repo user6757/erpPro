@@ -68,7 +68,9 @@
                     </div>
                 </div>
                 <div style="width:300px; text-align: center;" class="passwordfind-ok" id="passwordfind-ok">
-                	<div class="passwordText" id="passwordText"></div>
+                	<h2>
+                		<div class="passwordText" id="passwordText"></div>
+                	</h2>
                 </div>     	
             </div>
         </div>
@@ -114,7 +116,7 @@
     			/* $findform.style.display='none'; */
     			document.getElementById('passidfind-div-box').style.display="none";
     			document.getElementById('passwordText').style.display="block";
-    			document.getElementById('passwordText').append('초기화된 임시비밀번호는 '+passwords+'입니다.');
+    			document.getElementById('passwordText').append('회원님의 초기화된 임시비밀번호는 '+passwords+'입니다.');
     			return;
     		}	
     	}

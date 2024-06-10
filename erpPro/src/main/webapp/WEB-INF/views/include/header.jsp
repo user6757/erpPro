@@ -28,7 +28,8 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="/free/list">Community</a></li>
+            <li><a href="/free/list">Free</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
             <li><a href="/mroom/mrlist">Room</a></li>	<!-- 회의실 -->
             <li><a href="#">Contact</a></li>
 

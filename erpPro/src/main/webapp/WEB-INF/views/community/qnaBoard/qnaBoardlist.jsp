@@ -2,30 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ include file="../../include/static-head.jsp" %>
-
     <style>
         .board-list {
             width: 70%;
             margin: 230px auto 0;
         }
-
         .board-list .articles {
             margin: 10px auto 100px;
             border-collapse: collapse;
             font-size: 1.5em;
             border-radius: 10px;
         }
-
         /* 목록 개수별 보기 스타일 */
         .board-list .amount {
             display: flex;
             /* background: skyblue; */
             justify-content: flex-end;
         }
-
         .board-list .amount li {
             width: 8%;
             margin-right: 10px;
@@ -33,42 +28,32 @@
         .board-list .amount li a {
             width: 100%;
         }
-
-
-
         header {
             background: #222;
             border-bottom: 1px solid #2c2c2c;
         }
-
-
         /* pagination style */
         .bottom-section {
             margin-top: -50px;
             margin-bottom: 100px;
             display: flex;
         }
-
         .bottom-section nav {
             flex: 9;
             display: flex;
             justify-content: center;
         }
-
         .bottom-section .btn-write {
             flex: 1;
         }
-
         .pagination-custom a {
             color: #444 !important;
         }
-
         .pagination-custom li.active a,
         .pagination-custom li:hover a {
             background: #333 !important;
             color: #fff !important;
         }
-
         /* 검색창 */
         .board-list .top-section {
             display: flex;
@@ -93,11 +78,8 @@
 
     </style>
 </head>
-
 <body>
-
     <div class="wrap">
-
         <%@ include file="../../include/header.jsp" %>
 		<h2>Q&A 게시판</h2>
         <div class="board-list">
@@ -105,7 +87,7 @@
             <div class="top-section">
                 <!-- 검색창 영역 -->
                 <div class="search">
-                    <form action="/free/list" method="get">
+                    <form action="/qna/list" method="get">
                         
                         <select class="form-select" name="type" id="search-type">
                             <option value="title">제목</option>
@@ -140,19 +122,19 @@
                     <th>작성시간</th>
                 </tr>
 
-                <c:forEach var="free" items="${free}">
+                <c:forEach var="qnalist" items="${qna}">
                     <tr>
-                        <td><a href="/free/detail?seq=${free.seq }">${free.seq}</a></td>
-                        <td>${free.writer}</td>
+                        <td><a>${qnalist.qnano}</a></td>
+                        <td>${qnalist.writer}</td>
                         <td>
-                        ${free.title}
+                        ${qnalist.title}
                             <%-- ${b.shortTitle} [${b.replyCount}]
                             <c:if test="${b.newArticle}">
                                 <span class="badge rounded-pill bg-danger">new</span>
                             </c:if> --%>
                         </td>
-                        <td>${free.cnt}</td>
-                        <td>${free.regdate}</td>
+                        <td>${qnalist.qnacnt}</td>
+                        <td>${qnalist.strdate}</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -161,7 +143,7 @@
             <div class="bottom-section">
 
                 <!-- 페이지 버튼 영역 -->
-                <nav aria-label="Page navigation example">
+                <%-- <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-lg pagination-custom">
 
                        <c:if test="${pm.page > 1}">
@@ -181,11 +163,11 @@
                         </c:if>
 
                     </ul>
-                </nav>
+                </nav> --%>
 
                 <!-- 글쓰기 버튼 영역 -->
                 <div class="btn-write">
-                    <a class="btn btn-outline-danger btn-lg" href="/free/write">글쓰기</a>
+                    <a class="btn btn-outline-danger btn-lg" href="/qna/write">글쓰기</a>
                 </div>
             </div>
         </div>
@@ -196,27 +178,25 @@
     </div>
 
     <script>
-        function alertServerMessage() {
-            const msg = '${msg}';
-            // console.log('msg: ', msg);
-
-            if (msg === 'reg-success') {
-                alert('게시물이 정상 등록되었습니다.');
-            }
-        }
-
+    
+	    function alertServerMessage() {
+	        const msg = '${msg}';
+	        // console.log('msg: ', msg);
+	
+	        if (msg === 'reg-success') {
+	            alert('게시물이 정상 등록되었습니다.');
+	        }
+	    }
 
         function detailEvent() {
             //상세보기 요청 이벤트
             const $table = document.querySelector(".articles");
-			console.log('ss');
             $table.addEventListener('click', e => {
+            	console.log('확인!');
                 if (!e.target.matches('.articles td')) return;
-
                 let bn = e.target.parentElement.firstElementChild.textContent;
-
-                location.href = '/free/detail'
-                                + "?seq="+bn;
+                location.href = '/qna/qnadetail'
+                                + "?qnano="+bn;
             });
         }
 
@@ -261,7 +241,7 @@
             appendPageActive();
             fixSearchOption();
 
-        })();
+        })(); 
 
     </script>
 

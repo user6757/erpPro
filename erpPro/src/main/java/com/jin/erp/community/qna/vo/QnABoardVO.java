@@ -4,12 +4,21 @@ import java.util.Date;
 
 public class QnABoardVO {
 	
-	private Integer qnano;		//±Û¹øÈ£
-	private String title;		//Á¦¸ñ
-	private String writer;		//ÀÛ¼ºÀÚ
-	private String content;		//³»¿ë
-	private Date qnaregdate;		//ÀÛ¼º³¯Â¥
-	private Integer qnacnt;		//Á¶È¸¼ö
+	private Integer qnano;		//ï¿½Û¹ï¿½È£
+	private String title;		//ï¿½ï¿½ï¿½ï¿½
+	private String writer;		//ï¿½Û¼ï¿½ï¿½ï¿½
+	private String content;		//ï¿½ï¿½ï¿½ï¿½
+	private Date qnaregdate;		//ï¿½Û¼ï¿½ï¿½ï¿½Â¥
+	private Integer qnacnt;		//ï¿½ï¿½È¸ï¿½ï¿½
+	private String strdate;
+	private String keyword;
+	private String type;
+	private int start;
+	private int limit;
+	
+	public QnABoardVO() {
+		limit=10;
+	}
 	
 	public Integer getQnano() {
 		return qnano;
@@ -46,6 +55,44 @@ public class QnABoardVO {
 	}
 	public void setQnacnt(Integer qnacnt) {
 		this.qnacnt = qnacnt;
+	}
+	public String getStrdate() {
+		return strdate;
+	}
+	public void setStrdate(String strdate) {
+		this.strdate = strdate;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

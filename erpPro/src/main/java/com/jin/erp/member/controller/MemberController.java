@@ -25,11 +25,10 @@ import com.jin.erp.member.domain.Member;
 import com.jin.erp.member.service.MemberService;
 
 @Controller
-@EnableAsync
+@RequestMapping("/member")
 public class MemberController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private MemberService memberService;
 	
 	@Autowired 
@@ -37,17 +36,17 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
-	@RequestMapping(value="/member/membership", method= {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/membership", method=RequestMethod.GET)
 	public void memberShip() {
 	}
 	
-	@PostMapping(value="/member/idcheck")
+	@PostMapping(value="/idcheck")
 	@ResponseBody
 	public String idcheck(String account) {
 		return Integer.toString(memberService.idcheck(account));
 	}
 	
-	@PostMapping(value="/member/signup")
+	@PostMapping(value="/signup")
     public String signUp(Member member, HttpServletRequest request,
     		RedirectAttributes redirect, Model model, Exception e) throws Exception{
 		try {
@@ -67,28 +66,23 @@ public class MemberController {
         
     }
 	
-	@RequestMapping(value="/member/idfind", method= RequestMethod.GET)
+	@RequestMapping(value="/idfind", method= RequestMethod.GET)
     public void idFindPage(){
     }
 	
-	@RequestMapping(value="/member/passwordfind", method= RequestMethod.GET)
-    public void passwordFindPage(){
+	@RequestMapping(value="/passwordfind", method= RequestMethod.GET)
+    public void passwordFindPage(@ModelAttribute("password") String password){
     }
 	
-	@RequestMapping(value="/member/searchfind_ok", method= RequestMethod.POST)
+	@RequestMapping(value="/searchfind_ok", method= RequestMethod.POST)
 	public String passwordFindok(@RequestParam String account, String email, RedirectAttributes redirect) {
 		Map<String, Object> message = memberService.passwordfind(account, email);
 		redirect.addFlashAttribute("password", message.get("message"));
-		return "redirect:/member/joinfind_ok";
+		return "redirect:/member/passwordfind";
 	}
 	
-	@RequestMapping(value="/member/joinfind_ok", method= RequestMethod.GET)
-	public String passwordFindok(@ModelAttribute("password") String password) {
-		return "/member/passwordfind";
-	}
-	
-	@RequestMapping(value="/member/idsearch", method=RequestMethod.POST)
-    public ResponseEntity<String> idSearch(Member member, Model model) {
+	@RequestMapping(value="/idsearch", method=RequestMethod.POST)
+    public ResponseEntity idSearch(Member member, Model model) {
 		try {
 			Member dBSearchmember = memberService.idsearch(member);
 			if(dBSearchmember != null) {
@@ -98,7 +92,7 @@ public class MemberController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ResponseEntity<>("erorr", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
     }
 	

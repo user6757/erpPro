@@ -12,8 +12,10 @@ public interface QnABoardService {
 	
 	public int editBoard(QnABoardVO qnavo);
 	
-	public QnABoardVO detailboard(QnABoardVO qnaVO);
+	public QnABoardVO detailboard(int qnaNo);
 	
 	public int deleteBoard(int seq);
+	
+	public int qnalistGetnum();
 
 }
