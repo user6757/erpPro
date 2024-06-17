@@ -42,7 +42,7 @@ public class QnABoardController {
 	}
 	
 	@RequestMapping(value="/qna/qnadetail", method= {RequestMethod.POST, RequestMethod.GET})
-	public String qnaDetail(@ModelAttribute("qnano") int qnano, Model model) {
+	public String qnaDetail(int qnano, Model model) {
 		QnABoardVO qnaBoardVO = qnaBoardService.detailboard(qnano);
 		model.addAttribute("qna", qnaBoardVO);
 		return "community/qnaBoard/qnaBoarddetail";
@@ -65,6 +65,6 @@ public class QnABoardController {
 	
 	@RequestMapping("/qna/delete")
 	public String qnadelete(int seq) {
-		return "";
+		return "community/qnaBoard/qnaBoardedit";
 	}
 }
