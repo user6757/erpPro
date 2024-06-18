@@ -38,8 +38,9 @@
   </select>
   
   <delete id="qnadelete">
-  	delete from qnaboard
-  	  where qnano = #{qnano}
+  	DELETE
+  	  FROM QNABOARD
+  	WHERE QNANO = #{qnano}
   	
   </delete>
 

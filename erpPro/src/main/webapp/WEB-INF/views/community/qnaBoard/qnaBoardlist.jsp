@@ -123,18 +123,18 @@
                 </tr>
 
                 <c:forEach var="qnalist" items="${qna}">
-                    <tr>
-                        <td><a>${qnalist.qnano}</a></td>
-                        <td>${qnalist.writer}</td>
-                        <td>
-                        ${qnalist.title}
+                   <tr>
+                       <td><a>${qnalist.qnano}</a></td>
+                       <td>${qnalist.writer}</td>
+                       <td>
+                       ${qnalist.title}
                             <%-- ${b.shortTitle} [${b.replyCount}]
                             <c:if test="${b.newArticle}">
                                 <span class="badge rounded-pill bg-danger">new</span>
                             </c:if> --%>
-                        </td>
-                        <td>${qnalist.qnacnt}</td>
-                        <td>${qnalist.strdate}</td>
+                       </td>
+                       <td>${qnalist.qnacnt}</td>
+                       <td>${qnalist.strdate}</td>
                     </tr>
                 </c:forEach>
             </table>

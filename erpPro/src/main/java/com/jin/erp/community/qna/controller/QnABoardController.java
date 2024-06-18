@@ -63,8 +63,8 @@ public class QnABoardController {
 		return "community/freeBoard/freeBoardedit";
 	}
 	
-	@RequestMapping("/qna/delete")
+	@RequestMapping(value="/qna/delete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String qnadelete(int seq) {
-		return "community/qnaBoard/qnaBoardedit";
+		return qnaBoardService.deleteBoard(seq)==1? "redirect:/qna/list":"community/qnaBoard/qnaBoarddetail";
 	}
 }

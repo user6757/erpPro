@@ -86,7 +86,6 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-
                 <p class="main-content">
                     ${qna.content}
                 </p>
@@ -143,7 +142,6 @@
                         <div class="card-header text-white m-0" style="background: #343A40;">
                             <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
                         </div>
-
                         <!-- 댓글 내용 바디 -->
                         <div id="replyCollapse" class="card">
                             <div id="replyData">
@@ -151,7 +149,6 @@
 								< JS로 댓글 정보 DIV삽입 > 
 							-->
                             </div>
-
                             <!-- 댓글 페이징 영역 -->
                             <ul class="pagination justify-content-center">
                                 <!-- 
@@ -195,7 +192,6 @@
 
     <!-- 게시글 상세보기 관련 script -->
     <script>
-        
         const $modBtn = document.getElementById('mod-btn');
         const $delBtn = document.getElementById('del-btn');
         const $listBtn = document.getElementById('list-btn');
@@ -212,7 +208,7 @@
                 if (!confirm('정말 삭제하시겠습니까?')) {
                     return;
                 }
-                location.href = '/qna/delete?qnano=${qna.qnano}';
+                location.href = '/qna/delete?seq=${qna.qnano}';
             };
         }
         //목록버튼
