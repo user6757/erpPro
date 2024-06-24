@@ -5,14 +5,12 @@
 
 <head>
     <%@ include file="../../include/static-head.jsp" %>
-
     <style>
         .content-container {
             width: 60%;
             margin: 150px auto;
             position: relative;
         }
-
         .content-container .main-title {
             font-size: 24px;
             font-weight: 700;
@@ -22,7 +20,6 @@
             width: fit-content;
             margin: 20px auto 30px;
         }
-
         .content-container .main-content {
             border: 2px solid #ccc;
             border-radius: 20px;
@@ -31,14 +28,12 @@
             text-align: justify;
             min-height: 400px;
         }
-
         .content-container .custom-btn-group {
             position: absolute;
             bottom: -10%;
             left: 50%;
             transform: translateX(-50%);
         }
-
         /* 페이지 액티브 기능 */
         .pagination .page-item.p-active a {
             background: #333 !important;
@@ -46,17 +41,13 @@
             cursor: default;
             pointer-events: none;
         }
-
         .pagination .page-item:hover a {
             background: #888 !important;
             color: #fff !important;
         }
-
-
         .uploaded-list {
             display: flex;
         }
-
         .img-sizing {
             display: block;
             width: 100px;
@@ -64,7 +55,6 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="wrap">
@@ -192,6 +182,7 @@
 
     <!-- 게시글 상세보기 관련 script -->
     <script>
+    
         const $modBtn = document.getElementById('mod-btn');
         const $delBtn = document.getElementById('del-btn');
         const $listBtn = document.getElementById('list-btn');
@@ -199,7 +190,7 @@
         if ($modBtn !== null) {
             //수정버튼
             $modBtn.onclick = e => {
-                location.href = '/qna/modify?qnano=${qna.qnano}';
+                location.href = '/qna/editpage?qnano=${qna.qnano}';
             };
         }
         if ($delBtn !== null) {

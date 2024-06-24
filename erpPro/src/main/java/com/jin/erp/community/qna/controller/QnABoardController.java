@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jin.erp.HomeController;
 import com.jin.erp.community.qna.service.QnABoardService;
 import com.jin.erp.community.qna.vo.QnABoardVO;
 
@@ -48,23 +46,25 @@ public class QnABoardController {
 		return "community/qnaBoard/qnaBoarddetail";
 	}
 	
-	@RequestMapping("/qna/update")
-	public String freeupdate(QnABoardVO freevo) {
-		int result = qnaBoardService.editBoard(freevo);
-		if(result > 0) {
-			return "redirect:/qna/list";
+	@RequestMapping(value="/qna/update", method= RequestMethod.POST)
+	public String qnaupdate(QnABoardVO qnaBoardVO, Model model) {
+		int resultNum = qnaBoardService.editBoard(qnaBoardVO);
+		if(resultNum > 0) {
+			
+			return "redirect:/qna/qnadetail?qnano="+resultNum;
 		}else {
-			return "community/qnaBoard/qnaBoardedit";
+			return "redirect:/qna/list";
 		}
 	}
 	
-	@RequestMapping("/qna/editpage")
-	public String qnaeditpage(int seq, Model model) {
-		return "community/freeBoard/freeBoardedit";
+	@RequestMapping(value="/qna/editpage", method= {RequestMethod.POST, RequestMethod.GET})
+	public String qnaeditpage(int qnano, Model model) {
+		model.addAttribute("qna", qnaBoardService.detailboard(qnano));
+		return "community/qnaBoard/qnaBoardmodify";
 	}
 	
 	@RequestMapping(value="/qna/delete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String qnadelete(int seq) {
-		return qnaBoardService.deleteBoard(seq)==1? "redirect:/qna/list":"community/qnaBoard/qnaBoarddetail";
+		return qnaBoardService.deleteBoard(seq) == 1? "redirect:/qna/list":"community/qnaBoard/qnaBoarddetail";
 	}
 }

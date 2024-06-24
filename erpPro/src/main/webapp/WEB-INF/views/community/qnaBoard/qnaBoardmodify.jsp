@@ -2,10 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ include file="../../include/static-head.jsp" %>
-
     <style>
         .content-container {
             width: 60%;
@@ -22,7 +20,6 @@
             width: fit-content;
             margin: 20px auto 30px;
         }
-
         .content-container .main-content {
             border: 2px solid #ccc;
             border-radius: 20px;
@@ -31,7 +28,6 @@
             text-align: justify;
             min-height: 400px;
         }
-
         .content-container .custom-btn-group {
             position: absolute;
             bottom: -10%;
@@ -40,55 +36,57 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="wrap">
         <%@ include file="../../include/header.jsp" %>
-
-        <div class="content-container">
-
-            <form action="/free/update" method="post">
-
-                <input type="hidden" name="seq" value="${free.seq}">
-
-                <h1 class="main-title">${free.seq}번 게시물</h1>
+        <div class="content-container" id="qna-mid-box">
+        
+            <form action="/qna/update" method="post" class="qna-update-form" id="qna-update-form">
+                <input type="hidden" name="qnano" value="${qna.qnano}">
+                <h1 class="main-title">${qna.qnano}번 게시물</h1>
 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">작성자</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름" name="writer"
-                        value="${free.writer}" disabled>
+                    <input type="text" class="form-control writer" id="exampleFormControlInput1 writer" placeholder="이름" name="writer"
+                        value="${qna.writer}" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput2" class="form-label">글제목</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="제목" name="title"
-                        value="${free.title}">
+                    <input type="text" class="form-control title" id="exampleFormControlInput2 title" placeholder="제목" name="title"
+                        value="${qna.title}">
                 </div>
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-                    <textarea name="content" class="form-control" id="exampleFormControlTextarea1"
-                        rows="10">${free.content}</textarea>
+                    <textarea name="content" class="form-control content" id="exampleFormControlTextarea1 content" rows="10">${qna.content}</textarea>
                 </div>
-
 
                 <div class="btn-group btn-group-lg custom-btn-group" role="group">
-                    <button id="mod-btn" type="submit" class="btn btn-warning">완료</button>
+                    <button type="button" class="btn btn-warning qnamodybtn" id="qnamodybtn">완료</button>
                     <button type="button" class="btn btn-dark" onclick="list()">목록</button>
                 </div>
-
             </form>
-
         </div>
-
-
         <%@ include file="../../include/footer.jsp" %>
     </div>
-
 <script type="text/javascript">
-	function list(){
-		location.href='/free/list';
+	window.onload = function() {
+		const $modifybtn = document.getElementById('qnamodybtn');
+		
+		function list(){
+			location.href='/qna/list';
+		}
+		
+		$modifybtn.onclick = function(){
+			const $qnaupdateform = document.getElementById('qna-update-form');
+			if(confirm('게시글을 수정하시겠습니까?')){
+				$qnaupdateform.submit();
+			}else{
+				return;
+			}	
+		}
 	}
+	
 </script>
 </body>
 </html>

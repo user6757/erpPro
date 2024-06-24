@@ -30,7 +30,18 @@ public class QnABoardServiceImpl implements QnABoardService{
 	}
 	
 	public int editBoard(QnABoardVO qnaVO) {
-		return qnaDAO.editBoard(qnaVO);
+		if(qnaDAO.editBoard(qnaVO) == 1) {
+			System.out.println("여기");
+			QnABoardVO dBqnaBoardVO = qnaDAO.detailboard(qnaVO.getQnano());
+			if(dBqnaBoardVO.getQnano() != null && dBqnaBoardVO.getQnano() > 0 && dBqnaBoardVO.getQnano() == qnaVO.getQnano()) {
+				return dBqnaBoardVO.getQnano();
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
+		
 	}
 	
 	public QnABoardVO detailboard(int qnaNo) {

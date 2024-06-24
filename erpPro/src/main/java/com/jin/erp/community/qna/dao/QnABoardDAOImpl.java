@@ -22,8 +22,8 @@ public class QnABoardDAOImpl implements QnABoardDAO{
 		return sqlSession.insert("qnainsert", qnaVO);
 	}
 	
-	public int editBoard(QnABoardVO qnaVO) {
-		return sqlSession.update("qnaedit", qnaVO);
+	public int editBoard(QnABoardVO qnaBoardVO) {
+		return sqlSession.update("qnaedit", qnaBoardVO);
 				
 	}
 	

@@ -27,8 +27,9 @@
   </insert>
   
   <update id="qnaedit">
-  		update qnaboard set title = #{title}, content = #{content}
-  		 where qnano = #{qnano}
+  		update qnaboard
+  		  set title = #{title}, content = #{content}
+  		where qnano = #{qnano}
   </update>
   
   <select id="qnaone" resultType="com.jin.erp.community.qna.vo.QnABoardVO">
